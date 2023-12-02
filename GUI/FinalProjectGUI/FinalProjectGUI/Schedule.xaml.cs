@@ -22,7 +22,7 @@ namespace FinalProjectGUI
     {
         public Schedule()
         {
-            InitializeComponent();
+            //InitializeComponent();
         }
     }
 }

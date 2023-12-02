@@ -20,9 +20,16 @@ namespace FinalProjectGUI
     /// </summary>
     public partial class EmployeeInterface : Page
     {
+        private List<Event> allEvents = new List<Event>();
         public EmployeeInterface()
         {
             InitializeComponent();
+        }
+
+        private void RetrieveEventContainer()
+        {
+            //TODO
+            //Define allEvents list
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
