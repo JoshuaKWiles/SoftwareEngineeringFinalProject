@@ -140,8 +140,27 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="ConfrenceCenterSystem.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="Resource.h" />
+    <ClInclude Include="SQLiteCpp\Assertion.h" />
+    <ClInclude Include="SQLiteCpp\Backup.h" />
+    <ClInclude Include="SQLiteCpp\Column.h" />
+    <ClInclude Include="SQLiteCpp\Database.h" />
+    <ClInclude Include="SQLiteCpp\Exception.h" />
+    <ClInclude Include="SQLiteCpp\ExecuteMany.h" />
+    <ClInclude Include="SQLiteCpp\Savepoint.h" />
+    <ClInclude Include="SQLiteCpp\SQLiteCpp.h" />
+    <ClInclude Include="SQLiteCpp\SQLiteCppExport.h" />
+    <ClInclude Include="SQLiteCpp\Statement.h" />
+    <ClInclude Include="SQLiteCpp\Transaction.h" />
+    <ClInclude Include="SQLiteCpp\Utils.h" />
+    <ClInclude Include="SQLiteCpp\VariadicBind.h" />
+    <ClInclude Include="sqlite\sqlite3.h" />
+    <ClInclude Include="sqlite\sqlite3ext.h" />
+    <ClInclude Include="UUID\endianness.h" />
+    <ClInclude Include="UUID\uuid_v4.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
@@ -151,6 +170,15 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="SQLiteCpp\src\Backup.cpp" />
+    <ClCompile Include="SQLiteCpp\src\Column.cpp" />
+    <ClCompile Include="SQLiteCpp\src\Database.cpp" />
+    <ClCompile Include="SQLiteCpp\src\Exception.cpp" />
+    <ClCompile Include="SQLiteCpp\src\Savepoint.cpp" />
+    <ClCompile Include="SQLiteCpp\src\Statement.cpp" />
+    <ClCompile Include="SQLiteCpp\src\Transaction.cpp" />
+    <ClCompile Include="sqlite\shell.c" />
+    <ClCompile Include="sqlite\sqlite3.c" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
