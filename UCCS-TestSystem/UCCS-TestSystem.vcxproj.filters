@@ -113,5 +113,8 @@
     <ClInclude Include="..\UniversityConferenceCenterSystem\UUID\uuid_v4.h">
       <Filter>Header Files\UUIDv4</Filter>
     </ClInclude>
+    <ClInclude Include="..\UniversityConferenceCenterSystem\Guest.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

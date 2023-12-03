@@ -129,6 +129,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="ConferenceCenterSystem.h" />
+    <ClInclude Include="Guest.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="SQLiteCpp\Assertion.h" />
     <ClInclude Include="SQLiteCpp\Backup.h" />

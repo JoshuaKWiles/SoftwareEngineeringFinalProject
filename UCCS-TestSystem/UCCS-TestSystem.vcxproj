@@ -140,6 +140,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\UniversityConferenceCenterSystem\ConferenceCenterSystem.h" />
+    <ClInclude Include="..\UniversityConferenceCenterSystem\Guest.h" />
     <ClInclude Include="..\UniversityConferenceCenterSystem\Resource.h" />
     <ClInclude Include="..\UniversityConferenceCenterSystem\SQLiteCpp\Assertion.h" />
     <ClInclude Include="..\UniversityConferenceCenterSystem\SQLiteCpp\Backup.h" />
