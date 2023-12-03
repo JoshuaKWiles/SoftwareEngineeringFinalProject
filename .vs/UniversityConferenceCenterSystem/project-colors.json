@@ -1,0 +1,21 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "193925d4-6e7a-4a6c-a23d-3bb17a543bce": {
+      "ProjectGuid": "193925d4-6e7a-4a6c-a23d-3bb17a543bce",
+      "DisplayName": "UniversityConferenceCenterSystem",
+      "ColorIndex": 0
+    },
+    "b6b37ecd-eb69-4d61-a297-13a56c26d489": {
+      "ProjectGuid": "b6b37ecd-eb69-4d61-a297-13a56c26d489",
+      "DisplayName": "UCCS-TestSystem",
+      "ColorIndex": 1
+    },
+    "1f0320e0-5595-40cb-8038-d01071c99a92": {
+      "ProjectGuid": "1f0320e0-5595-40cb-8038-d01071c99a92",
+      "DisplayName": "FinalProjectGUI",
+      "ColorIndex": 2
+    }
+  },
+  "NextColorIndex": 3
+}
