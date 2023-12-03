@@ -45,6 +45,7 @@ public:
 };
 
 class Equipment : public Resource {
+public:
 	enum EquipmentType {
 		Whiteboard,
 		Projector,

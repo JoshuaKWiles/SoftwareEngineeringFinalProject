@@ -144,7 +144,6 @@
     <ClInclude Include="SQLiteCpp\Utils.h" />
     <ClInclude Include="SQLiteCpp\VariadicBind.h" />
     <ClInclude Include="sqlite\sqlite3.h" />
-    <ClInclude Include="sqlite\sqlite3ext.h" />
     <ClInclude Include="UUID\endianness.h" />
     <ClInclude Include="UUID\uuid_v4.h" />
   </ItemGroup>
@@ -156,7 +155,6 @@
     <ClCompile Include="SQLiteCpp\src\Savepoint.cpp" />
     <ClCompile Include="SQLiteCpp\src\Statement.cpp" />
     <ClCompile Include="SQLiteCpp\src\Transaction.cpp" />
-    <ClCompile Include="sqlite\shell.c" />
     <ClCompile Include="sqlite\sqlite3.c" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
