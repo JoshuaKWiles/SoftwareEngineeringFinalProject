@@ -13,15 +13,105 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\UUIDv4">
+      <UniqueIdentifier>{96dc384c-a4e8-4fc5-afce-602c61723d08}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\SQLite3">
+      <UniqueIdentifier>{8a9d7abf-5013-48a4-8d0f-531439aec0e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\SQLiteCpp%28Wraper%29">
+      <UniqueIdentifier>{264476e1-3a84-4b2c-a667-0e0faf741ade}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\SQLite3">
+      <UniqueIdentifier>{e657fc0e-b291-46d8-95f4-47091531bf0b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\SQLiteCpp%28Wraper%29">
+      <UniqueIdentifier>{205a5f0c-033b-41a4-8fa5-36805a76e579}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="UCCS-TestSystem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\UniversityConferenceCenterSystem\sqlite\sqlite3.c">
+      <Filter>Resource Files\SQLite3</Filter>
+    </ClCompile>
+    <ClCompile Include="..\UniversityConferenceCenterSystem\SQLiteCpp\src\Backup.cpp">
+      <Filter>Resource Files\SQLiteCpp%28Wraper%29</Filter>
+    </ClCompile>
+    <ClCompile Include="..\UniversityConferenceCenterSystem\SQLiteCpp\src\Column.cpp">
+      <Filter>Resource Files\SQLiteCpp%28Wraper%29</Filter>
+    </ClCompile>
+    <ClCompile Include="..\UniversityConferenceCenterSystem\SQLiteCpp\src\Database.cpp">
+      <Filter>Resource Files\SQLiteCpp%28Wraper%29</Filter>
+    </ClCompile>
+    <ClCompile Include="..\UniversityConferenceCenterSystem\SQLiteCpp\src\Exception.cpp">
+      <Filter>Resource Files\SQLiteCpp%28Wraper%29</Filter>
+    </ClCompile>
+    <ClCompile Include="..\UniversityConferenceCenterSystem\SQLiteCpp\src\Savepoint.cpp">
+      <Filter>Resource Files\SQLiteCpp%28Wraper%29</Filter>
+    </ClCompile>
+    <ClCompile Include="..\UniversityConferenceCenterSystem\SQLiteCpp\src\Statement.cpp">
+      <Filter>Resource Files\SQLiteCpp%28Wraper%29</Filter>
+    </ClCompile>
+    <ClCompile Include="..\UniversityConferenceCenterSystem\SQLiteCpp\src\Transaction.cpp">
+      <Filter>Resource Files\SQLiteCpp%28Wraper%29</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\UniversityConferenceCenterSystem\Resource.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\UniversityConferenceCenterSystem\ConferenceCenterSystem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\UniversityConferenceCenterSystem\sqlite\sqlite3.h">
+      <Filter>Header Files\SQLite3</Filter>
+    </ClInclude>
+    <ClInclude Include="..\UniversityConferenceCenterSystem\SQLiteCpp\Assertion.h">
+      <Filter>Header Files\SQLiteCpp%28Wraper%29</Filter>
+    </ClInclude>
+    <ClInclude Include="..\UniversityConferenceCenterSystem\SQLiteCpp\Backup.h">
+      <Filter>Header Files\SQLiteCpp%28Wraper%29</Filter>
+    </ClInclude>
+    <ClInclude Include="..\UniversityConferenceCenterSystem\SQLiteCpp\Column.h">
+      <Filter>Header Files\SQLiteCpp%28Wraper%29</Filter>
+    </ClInclude>
+    <ClInclude Include="..\UniversityConferenceCenterSystem\SQLiteCpp\Database.h">
+      <Filter>Header Files\SQLiteCpp%28Wraper%29</Filter>
+    </ClInclude>
+    <ClInclude Include="..\UniversityConferenceCenterSystem\SQLiteCpp\Exception.h">
+      <Filter>Header Files\SQLiteCpp%28Wraper%29</Filter>
+    </ClInclude>
+    <ClInclude Include="..\UniversityConferenceCenterSystem\SQLiteCpp\ExecuteMany.h">
+      <Filter>Header Files\SQLiteCpp%28Wraper%29</Filter>
+    </ClInclude>
+    <ClInclude Include="..\UniversityConferenceCenterSystem\SQLiteCpp\Savepoint.h">
+      <Filter>Header Files\SQLiteCpp%28Wraper%29</Filter>
+    </ClInclude>
+    <ClInclude Include="..\UniversityConferenceCenterSystem\SQLiteCpp\SQLiteCpp.h">
+      <Filter>Header Files\SQLiteCpp%28Wraper%29</Filter>
+    </ClInclude>
+    <ClInclude Include="..\UniversityConferenceCenterSystem\SQLiteCpp\SQLiteCppExport.h">
+      <Filter>Header Files\SQLiteCpp%28Wraper%29</Filter>
+    </ClInclude>
+    <ClInclude Include="..\UniversityConferenceCenterSystem\SQLiteCpp\Statement.h">
+      <Filter>Header Files\SQLiteCpp%28Wraper%29</Filter>
+    </ClInclude>
+    <ClInclude Include="..\UniversityConferenceCenterSystem\SQLiteCpp\Transaction.h">
+      <Filter>Header Files\SQLiteCpp%28Wraper%29</Filter>
+    </ClInclude>
+    <ClInclude Include="..\UniversityConferenceCenterSystem\SQLiteCpp\Utils.h">
+      <Filter>Header Files\SQLiteCpp%28Wraper%29</Filter>
+    </ClInclude>
+    <ClInclude Include="..\UniversityConferenceCenterSystem\SQLiteCpp\VariadicBind.h">
+      <Filter>Header Files\SQLiteCpp%28Wraper%29</Filter>
+    </ClInclude>
+    <ClInclude Include="..\UniversityConferenceCenterSystem\UUID\endianness.h">
+      <Filter>Header Files\UUIDv4</Filter>
+    </ClInclude>
+    <ClInclude Include="..\UniversityConferenceCenterSystem\UUID\uuid_v4.h">
+      <Filter>Header Files\UUIDv4</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

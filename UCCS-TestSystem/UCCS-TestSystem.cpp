@@ -3,9 +3,18 @@
 
 #include <string>
 
+#include "ConferenceCenterSystem.h"
 #include "Resource.h"
 int main()
 {
+	{// Test ConferenceManager Class
+		{// Test Singleton
+			ConferenceManager* test1 = ConferenceManager::getInstance();
+			ConferenceManager* test2 = ConferenceManager::getInstance();
+
+			assert(test1 == test2);
+		}
+	}
 	{// Test Resource Classes
 		{// Test Location Class
 			{// Test Constructors on initializer type

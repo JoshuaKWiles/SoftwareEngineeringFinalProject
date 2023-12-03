@@ -128,10 +128,35 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\UniversityConferenceCenterSystem\SQLiteCpp\src\Backup.cpp" />
+    <ClCompile Include="..\UniversityConferenceCenterSystem\SQLiteCpp\src\Column.cpp" />
+    <ClCompile Include="..\UniversityConferenceCenterSystem\SQLiteCpp\src\Database.cpp" />
+    <ClCompile Include="..\UniversityConferenceCenterSystem\SQLiteCpp\src\Exception.cpp" />
+    <ClCompile Include="..\UniversityConferenceCenterSystem\SQLiteCpp\src\Savepoint.cpp" />
+    <ClCompile Include="..\UniversityConferenceCenterSystem\SQLiteCpp\src\Statement.cpp" />
+    <ClCompile Include="..\UniversityConferenceCenterSystem\SQLiteCpp\src\Transaction.cpp" />
+    <ClCompile Include="..\UniversityConferenceCenterSystem\sqlite\sqlite3.c" />
     <ClCompile Include="UCCS-TestSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\UniversityConferenceCenterSystem\ConferenceCenterSystem.h" />
     <ClInclude Include="..\UniversityConferenceCenterSystem\Resource.h" />
+    <ClInclude Include="..\UniversityConferenceCenterSystem\SQLiteCpp\Assertion.h" />
+    <ClInclude Include="..\UniversityConferenceCenterSystem\SQLiteCpp\Backup.h" />
+    <ClInclude Include="..\UniversityConferenceCenterSystem\SQLiteCpp\Column.h" />
+    <ClInclude Include="..\UniversityConferenceCenterSystem\SQLiteCpp\Database.h" />
+    <ClInclude Include="..\UniversityConferenceCenterSystem\SQLiteCpp\Exception.h" />
+    <ClInclude Include="..\UniversityConferenceCenterSystem\SQLiteCpp\ExecuteMany.h" />
+    <ClInclude Include="..\UniversityConferenceCenterSystem\SQLiteCpp\Savepoint.h" />
+    <ClInclude Include="..\UniversityConferenceCenterSystem\SQLiteCpp\SQLiteCpp.h" />
+    <ClInclude Include="..\UniversityConferenceCenterSystem\SQLiteCpp\SQLiteCppExport.h" />
+    <ClInclude Include="..\UniversityConferenceCenterSystem\SQLiteCpp\Statement.h" />
+    <ClInclude Include="..\UniversityConferenceCenterSystem\SQLiteCpp\Transaction.h" />
+    <ClInclude Include="..\UniversityConferenceCenterSystem\SQLiteCpp\Utils.h" />
+    <ClInclude Include="..\UniversityConferenceCenterSystem\SQLiteCpp\VariadicBind.h" />
+    <ClInclude Include="..\UniversityConferenceCenterSystem\sqlite\sqlite3.h" />
+    <ClInclude Include="..\UniversityConferenceCenterSystem\UUID\endianness.h" />
+    <ClInclude Include="..\UniversityConferenceCenterSystem\UUID\uuid_v4.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
