@@ -32,5 +32,10 @@
         <Button Grid.Column="6" Grid.Row="0" Grid.ColumnSpan="2"
                 Margin="15" FontSize="20" Content="View Schedule" Click="Button_Click"
                 Background="#BFBFBF"/>
+        <Button Grid.Column="4" Grid.Row="0" Grid.ColumnSpan="2" 
+                Margin="15" FontSize="20" Background="#BFBFBF"
+                Name="EventOpenClose" Content="Load Event" Click="LoadEvent_Click"/>
+        <Frame Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="4" 
+               Grid.RowSpan="4" Name="eventInterface"/>
     </Grid>
 </Page>

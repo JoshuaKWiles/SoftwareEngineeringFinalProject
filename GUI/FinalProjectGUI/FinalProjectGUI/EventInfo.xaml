@@ -1,0 +1,175 @@
+﻿<Page x:Class="FinalProjectGUI.EventInfo"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:FinalProjectGUI"
+      mc:Ignorable="d" 
+      d:DesignHeight="400" d:DesignWidth="400"
+      Title="EventInfo">
+
+    <Grid Background="#B9B9B9">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <TextBlock Grid.Row="0" Grid.Column="0" 
+                   Grid.ColumnSpan="2" FontSize="16" 
+                   VerticalAlignment="Center" HorizontalAlignment="Left"
+                   Margin="5 0 0 0" Text="Event Name:"/>
+        <TextBox Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="6"
+                 Margin="6" TextAlignment="Left" Padding="3 7 5 0" 
+                 FontSize="16" Text="Placeholder Event"
+                 Name="x_EventName"/>
+        <TextBlock Grid.Row="1" Grid.Column="0" 
+                   Grid.ColumnSpan="2" FontSize="16" 
+                   VerticalAlignment="Center" HorizontalAlignment="Left"
+                   Margin="5 0 0 0" Text="Event Date:"/>
+        <TextBox Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="3"
+                 Margin="6" TextAlignment="Left" Padding="3 4 5 0" 
+                 FontSize="20" Text="1-1-1969"
+                 Name="x_EventDate"/>
+        <!--Event Status box tells the user if the event is passed, 
+        upcoming, currently happening, or canceled.
+        Change textbox color based on status, blue for upcoming, 
+        green for currently happening, grey for passed, red for 
+        canceled event. Default if status not know is white-->
+        <TextBox Grid.Row="1" Grid.Column="5" Grid.ColumnSpan="3"
+                 Margin="6" TextAlignment="Left" Padding="3 7 5 0" 
+                 FontSize="16" Text="Status"
+                 Name="x_EventStatus"/>
+        <TextBlock Grid.Row="2" Grid.Column="0" 
+                   Grid.ColumnSpan="2" FontSize="16" 
+                   VerticalAlignment="Center" HorizontalAlignment="Left"
+                   Margin="5 0 0 0" Text="Event Time:"/>
+        <TextBox Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="6"
+                 Margin="6" TextAlignment="Left" Padding="3 4 5 0" 
+                 FontSize="20" Text="2:30 PM EST "
+                 Name="x_EventTime"/>
+        <TextBlock Grid.Row="3" Grid.Column="0" 
+                   Grid.ColumnSpan="3" FontSize="16" 
+                   VerticalAlignment="Center" HorizontalAlignment="Left"
+                   Margin="5 0 0 0" Text="Event Price:"/>
+        <TextBox Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2"
+                 Margin="6" TextAlignment="Left" Padding="3 4 5 0" 
+                 FontSize="20" Text="$1,200"
+                 Name="x_EventPrice"/>
+        
+        <!--#region Equipment Grid-->
+        <Grid Grid.Column="4" Grid.Row="3"
+                    Grid.ColumnSpan="4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!--White Board-->
+            <StackPanel Orientation="Horizontal" Grid.Column="0" 
+                        VerticalAlignment="Center">
+                <Button Name="whiteboardButton" Click="whiteboardButton_Click">
+                    <Button.Content>
+                        <Rectangle Height="15" Width="15" Fill="White"
+                                   VerticalAlignment="Center" 
+                                   HorizontalAlignment="Left" 
+                                   ToolTip="Costs $60"
+                                   Name="WhiteboardBox"/>
+                    </Button.Content>
+                </Button>
+                <TextBlock FontSize="12" Text="White Board"
+                           Margin="10 0 0 0" HorizontalAlignment="Center"/>
+            </StackPanel>
+
+            <!--Projector-->
+            <StackPanel Orientation="Horizontal" Grid.Column="1"
+                        VerticalAlignment="Center">
+                <Button Name="projectorButton" Click="projectorButton_Click">
+                    <Button.Content>
+                        <Rectangle Height="15" Width="15" Fill="White"
+                                   VerticalAlignment="Center" 
+                                   HorizontalAlignment="Left" 
+                                   ToolTip="Costs $100"
+                                   Name="ProjectorBox"/>
+                    </Button.Content>
+                </Button>
+                <TextBlock FontSize="12" Text="Projector"
+                           Margin="10 0 0 0" HorizontalAlignment="Center"/>
+            </StackPanel>
+
+            <!--Speaker-->
+            <StackPanel Orientation="Horizontal" Grid.Column="0"
+                        Grid.Row="1" VerticalAlignment="Center">
+                <Button Name="speakerButton" Click="speakerButton_Click">
+                    <Button.Content>
+                        <Rectangle Height="15" Width="15" Fill="White"
+                                   VerticalAlignment="Center" 
+                                   HorizontalAlignment="Left"
+                                   ToolTip="Costs $50"
+                                   Name="SpeakerBox"/>
+                    </Button.Content>
+                </Button>
+                <TextBlock FontSize="12" Text="Speaker"
+                           Margin="10 0 0 0" HorizontalAlignment="Center"/>
+            </StackPanel>
+
+
+            <!--Microphone-->
+            <StackPanel Orientation="Horizontal" Grid.Column="1"
+                        Grid.Row="1" VerticalAlignment="Center">
+                <Button Name="microphoneButton" Click="microphoneButton_Click">
+                    <Button.Content>
+                        <Rectangle Height="15" Width="15" Fill="White"
+                                   VerticalAlignment="Center" 
+                                   HorizontalAlignment="Left" 
+                                   ToolTip="Costs $30"
+                                   Name="MicrophoneBox"/>
+                    </Button.Content>
+                </Button>
+                <TextBlock FontSize="12" Text="Microphone"
+                           Margin="10 0 0 0" HorizontalAlignment="Center"/>
+            </StackPanel>
+        </Grid>
+        <!--#endregion-->
+
+        <TextBlock Grid.Row="4" Grid.Column="0" 
+                   Grid.ColumnSpan="3" FontSize="16" 
+                   VerticalAlignment="Center" HorizontalAlignment="Left"
+                   Margin="5 0 0 0" Text="Location:"/>
+        <TextBox Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="3"
+                 Margin="6" TextAlignment="Left" Padding="3 7 5 0" 
+                 FontSize="16" Text="Roosevelt"
+                 Name="x_EventLocation"/>
+
+        <TextBlock Grid.Row="7" Grid.Column="0" 
+                   Grid.ColumnSpan="3" FontSize="16" 
+                   VerticalAlignment="Center" HorizontalAlignment="Left"
+                   Margin="5 0 0 0" Text="Extra Info:"/>
+        <TextBox Grid.Row="7" Grid.Column="2" Grid.ColumnSpan="6"
+                 Margin="6" TextAlignment="Left" TextWrapping="Wrap"
+                 FontSize="16" Text="Special Event (200 Guests)
+                                     Other filler info idk"
+                 Name="x_EventAdditionalInfo"/>
+
+    </Grid>
+    
+</Page>

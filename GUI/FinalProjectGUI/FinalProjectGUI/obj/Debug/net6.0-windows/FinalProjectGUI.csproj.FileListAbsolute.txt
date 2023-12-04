@@ -49,3 +49,5 @@ C:\Users\Steven Dnako\Documents\GitHub\SoftwareEngineeringFinalProject\GUI\Final
 C:\Users\Steven Dnako\Documents\GitHub\SoftwareEngineeringFinalProject\GUI\FinalProjectGUI\FinalProjectGUI\obj\Debug\net6.0-windows\FinalProjectGUI.pdb
 C:\Users\Steven Dnako\Documents\GitHub\SoftwareEngineeringFinalProject\GUI\FinalProjectGUI\FinalProjectGUI\obj\Debug\net6.0-windows\FinalProjectGUI.genruntimeconfig.cache
 C:\Users\Steven Dnako\Documents\GitHub\SoftwareEngineeringFinalProject\GUI\FinalProjectGUI\FinalProjectGUI\obj\Debug\net6.0-windows\ref\FinalProjectGUI.dll
+C:\Users\kingj\source\repos\SoftwareEngineeringFinalProject\SoftwareEngineeringFinalProject\GUI\FinalProjectGUI\FinalProjectGUI\obj\Debug\net6.0-windows\EventInfo.g.cs
+C:\Users\kingj\source\repos\SoftwareEngineeringFinalProject\SoftwareEngineeringFinalProject\GUI\FinalProjectGUI\FinalProjectGUI\obj\Debug\net6.0-windows\EventInfo.baml

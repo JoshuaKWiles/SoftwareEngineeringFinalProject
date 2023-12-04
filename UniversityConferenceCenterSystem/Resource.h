@@ -25,7 +25,7 @@ public:
 		case Lincoln:
 			return 400.0l;
 		case Washington:
-			return 500.0;
+			return 500.0l;
 		default:
 			return 0.0l; // There is an error if this happens
 		}
@@ -39,7 +39,7 @@ public:
 		case Washington:
 			return "Washington";
 		default:
-			return "Locatoin Error"; // There is an error if this happens
+			return "Location Error"; // There is an error if this happens
 		}
 	}
 };

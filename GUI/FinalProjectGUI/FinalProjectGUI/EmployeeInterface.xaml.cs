@@ -36,5 +36,21 @@ namespace FinalProjectGUI
         {
 
         }
+
+        private void LoadEvent_Click(object sender, RoutedEventArgs e)
+        {
+            if (Convert.ToString(EventOpenClose.Content) == "Load Event")
+            {
+                eventInterface.Navigate(new EventInfo());
+                EventOpenClose.Content = "Close Event";
+            }
+            else if(Convert.ToString(EventOpenClose.Content) == "Close Event")
+            {
+                eventInterface.Content = null;
+                while (eventInterface.NavigationService.RemoveBackEntry() != null) ;
+                EventOpenClose.Content = "Load Event";
+            }
+            
+        }
     }
 }

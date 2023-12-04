@@ -15,6 +15,11 @@
       "ProjectGuid": "1f0320e0-5595-40cb-8038-d01071c99a92",
       "DisplayName": "FinalProjectGUI",
       "ColorIndex": 2
+    },
+    "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3": {
+      "ProjectGuid": "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3",
+      "DisplayName": "Miscellaneous Files",
+      "ColorIndex": -1
     }
   },
   "NextColorIndex": 3
