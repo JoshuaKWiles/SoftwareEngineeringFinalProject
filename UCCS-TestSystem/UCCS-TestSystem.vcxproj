@@ -105,6 +105,8 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>C:\Users\Steven Dnako\Documents\GitHub\SoftwareEngineeringFinalProject\UniversityConferenceCenterSystem\UUID;C:\Users\Steven Dnako\Documents\GitHub\SoftwareEngineeringFinalProject\UniversityConferenceCenterSystem\SQLiteCpp;C:\Users\Steven Dnako\Documents\GitHub\SoftwareEngineeringFinalProject\UniversityConferenceCenterSystem\sqlite;C:\Users\Steven Dnako\Documents\GitHub\SoftwareEngineeringFinalProject\UniversityConferenceCenterSystem;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

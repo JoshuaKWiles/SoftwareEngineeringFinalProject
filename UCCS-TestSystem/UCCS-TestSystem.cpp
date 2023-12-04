@@ -15,6 +15,8 @@ int main()
 
 			assert(test1 == test2);
 		}
+		//ConferenceManager& test = *ConferenceManager::getInstance();
+		//test.init();
 	}
 	{// Test Resource Classes
 		{// Test Location Class
