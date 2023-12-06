@@ -1,5 +1,9 @@
 #pragma once
+#include "uuid_v4.h"
+#include "SQLiteCpp.h"
+
 #include <string>
+
 class Resource {
 public:
 	const std::string id;
@@ -69,4 +73,25 @@ public:
 			return 0.0l; // There is an error if this happens
 		}
 	}
+};
+
+class ResourceManager {
+public:
+	ResourceManager(SQLite::Database* db, UUIDv4::UUIDGenerator<std::mt19937_64>* generator) : database(db), uuidGenerator(generator) {}
+	std::string regesterLocation(const char* sessionID, Location::RoomType location) { 
+		// Need to implement sql query
+		// regesterLocation will query database and return the uuid of the resource with the specified room type and update the relation table
+		std::string ret = uuidGenerator->getUUID().str();
+		return ret; 
+	}
+	std::string regesterEquipment(const char* sessionID, Equipment::EquipmentType resource) {
+		// Need to implement sql query
+		// regesterEquipment will query database, filter out equipment in use that matches the day of the session (joins on the relations event/session and session/equipment), and returns the first available equipment of the specified type then updates the relation table
+		std::string ret = uuidGenerator->getUUID().str();
+		return ret;
+	}
+
+private:
+	SQLite::Database* database;
+	UUIDv4::UUIDGenerator<std::mt19937_64>* uuidGenerator;
 };

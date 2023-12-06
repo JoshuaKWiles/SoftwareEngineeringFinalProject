@@ -144,6 +144,7 @@
     <ClInclude Include="..\UniversityConferenceCenterSystem\ConferenceCenterSystem.h" />
     <ClInclude Include="..\UniversityConferenceCenterSystem\Guest.h" />
     <ClInclude Include="..\UniversityConferenceCenterSystem\Resource.h" />
+    <ClInclude Include="..\UniversityConferenceCenterSystem\ScheduleEvent.h" />
     <ClInclude Include="..\UniversityConferenceCenterSystem\SQLiteCpp\Assertion.h" />
     <ClInclude Include="..\UniversityConferenceCenterSystem\SQLiteCpp\Backup.h" />
     <ClInclude Include="..\UniversityConferenceCenterSystem\SQLiteCpp\Column.h" />
