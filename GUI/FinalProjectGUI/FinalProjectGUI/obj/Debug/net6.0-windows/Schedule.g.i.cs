@@ -61,7 +61,7 @@ namespace FinalProjectGUI {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/FinalProjectGUI;V1.0.0.0;component/schedule.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/FinalProjectGUI;component/schedule.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\Schedule.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

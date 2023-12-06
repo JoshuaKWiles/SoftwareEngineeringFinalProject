@@ -11,7 +11,6 @@ public:
 
 	virtual long double getCost() = 0;
 	virtual std::string getSchedule() = 0;
-	virtual std::vector<Guest> getGuestList() = 0;
 	virtual std::vector<Presenter> getPresenter() = 0;
 
 	const std::string scheduleID;
@@ -20,9 +19,7 @@ public:
 
 class Session : public ScheduleEvent {
 public:
-	Session(const char* id, const char* name_, Location::RoomType room, const char* start, const char* end) : ScheduleEvent(id, name_), startTime(start), endTime(end) { 
-		location = new Location(ConferenceManager::getInstance()->resourceManager->regesterLocation(scheduleID.c_str(), room), room);
-	}
+	Session(const char* id, const char* name_, Location::RoomType room, const char* start, const char* end) : ScheduleEvent(id, name_), location(ConferenceManager::getInstance()->resourceManager->regesterLocation(id, room)), startTime(start), endTime(end) { }
 	~Session() {
 		delete location;
 		for (auto resource : equipmentList) delete resource;
@@ -38,13 +35,12 @@ public:
 	}
 
 	std::string getSchedule() { return "(" +startTime + " - " + endTime + ")"; }
-	std::vector<Guest> getGuestList() {}
 	std::vector<Presenter> getPresenter() {}
 
 	void addResource(Equipment::EquipmentType resource) {
-		equipmentList.push_back(new Equipment(ConferenceManager::getInstance()->resourceManager->regesterEquipment(scheduleID.c_str(), resource), resource));
+		equipmentList.push_back(ConferenceManager::getInstance()->resourceManager->regesterEquipment(scheduleID.c_str(), resource));
 	}
 private:
-	Location* location;
+	Location* const location;
 	std::vector<Equipment*> equipmentList;
 };
