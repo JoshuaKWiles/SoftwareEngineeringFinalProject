@@ -13,6 +13,9 @@
     <Compile Update="EventInfo.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="MaintenanceReportxaml.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Schedule.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -22,6 +25,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="EventInfo.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="MaintenanceReportxaml.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="MainWindow.xaml">
