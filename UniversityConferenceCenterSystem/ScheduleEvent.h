@@ -47,6 +47,14 @@ public:
 	void addResource(Equipment::EquipmentType resource) {
 		equipmentList.push_back(ConferenceManager::getInstance()->resourceManager->regesterEquipment(scheduleID.c_str(), resource));
 	}
+	std::vector<Equipment const*> getResources() {
+		std::vector<Equipment const*> ret;
+		if (!equipmentList.empty())
+			for (auto equipment : equipmentList) ret.push_back(equipment);
+		return ret;
+	}
+
+	// reprotResources is an alternate take on getResources
 	std::string reportResources() {
 		std::string ret = "";
 		if (!equipmentList.empty()) {
