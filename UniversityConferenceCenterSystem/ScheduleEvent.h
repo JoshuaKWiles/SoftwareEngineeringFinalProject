@@ -27,20 +27,38 @@ public:
 
 	const std::string startTime;
 	const std::string endTime;
+	Location* const location;
 
 	long double getCost() {
 		long double total = location->getCost();
-		for (auto resource : equipmentList) total += resource->getCost();
+		if(!equipmentList.empty())
+			for (auto resource : equipmentList) total += resource->getCost();
 		return total;
 	}
 
-	std::string getSchedule() { return "(" +startTime + " - " + endTime + ")"; }
-	std::vector<Presenter> getPresenter() {}
+	std::string getSchedule() { return '(' + startTime + " - " + endTime + ')'; }
+	std::vector<Presenter> getPresenter() {
+		std::vector<Presenter> ret;
+		// Need to implement sql query
+		//getPresenter will query the database and return all presenter associated with the session id
+		return ret;
+	}
 
 	void addResource(Equipment::EquipmentType resource) {
 		equipmentList.push_back(ConferenceManager::getInstance()->resourceManager->regesterEquipment(scheduleID.c_str(), resource));
 	}
+	std::string reportResources() {
+		std::string ret = "";
+		if (!equipmentList.empty()) {
+			for (auto equipment : equipmentList) {
+				ret.append(equipment->getName());
+				ret.push_back(' ');
+			}
+			if (ret.back() == ' ') ret.pop_back();
+		}
+		else ret = "No Equipment Used.";
+		return ret;
+	}
 private:
-	Location* const location;
 	std::vector<Equipment*> equipmentList;
 };

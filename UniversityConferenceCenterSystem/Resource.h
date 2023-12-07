@@ -10,6 +10,7 @@ public:
 	Resource(const char* resouceID) : id(resouceID) { }
 	Resource(const std::string& resourceID) : id(resourceID) { }
 	virtual long double getCost() = 0;
+	virtual const char* getName() = 0;
 };
 
 class Location : public Resource {
@@ -71,6 +72,21 @@ public:
 			return 30.0l;
 		default:
 			return 0.0l; // There is an error if this happens
+		}
+	}
+	const char* getName() {
+		switch (what)
+		{
+		case Whiteboard:
+			return "Whiteboard";
+		case Projector:
+			return "Projector";
+		case Speaker:
+			return "Speaker";
+		case Microphone:
+			return "Microphone";
+		default:
+			return "Euipment Error";
 		}
 	}
 };
