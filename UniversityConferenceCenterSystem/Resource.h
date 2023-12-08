@@ -2,6 +2,7 @@
 #include "uuid_v4.h"
 #include "SQLiteCpp.h"
 
+#include <exception>
 #include <string>
 
 class Resource {
@@ -20,6 +21,8 @@ public:
 		Washington
 	};
 	const RoomType room;
+	Location(const std::string& id);
+	Location(const Location::RoomType& hostRoom);
 	Location(const std::string& locationID, const RoomType& hostRoom) : Resource(locationID), room(hostRoom) { }
 	long double getCost() const {
 		switch (room){
@@ -30,6 +33,7 @@ public:
 		case Washington:
 			return 500.0l;
 		}
+		throw std::logic_error("Room Does Not Exist.");
 	}
 	std::string getName() const {
 		switch (room){
@@ -40,8 +44,16 @@ public:
 		case Washington:
 			return "Washington";
 		}
+		throw std::logic_error("Room Does Not Exist.");
 	}
 };
+
+Location::RoomType typeLocation(const std::string& location) {
+	if (location == "Roosevelt") return Location::Roosevelt;
+	else if (location == "Lincoln") return Location::Lincoln;
+	else if (location == "Washington") return Location::Washington;
+	throw std::logic_error("Room Does Not Exist.");
+}
 
 std::string typeName(const Location::RoomType& resource) {
 	switch (resource) {
@@ -52,6 +64,7 @@ std::string typeName(const Location::RoomType& resource) {
 	case Location::Washington:
 		return "Washington";
 	}
+	throw std::logic_error("Room Does Not Exist.");
 }
 
 class Equipment : public Resource {
@@ -63,6 +76,8 @@ public:
 		Microphone
 	};
 	const EquipmentType what;
+	Equipment(const std::string& id);
+	Equipment(const EquipmentType& type);
 	Equipment(const std::string& equipmentID, const EquipmentType& type) : Resource(equipmentID), what(type) { }
 	long double getCost() const {
 		switch (what){
@@ -75,6 +90,7 @@ public:
 		case Microphone:
 			return 30.0l;
 		}
+		throw std::logic_error("Equipment Type Does Not Exist.");
 	}
 	std::string getName() const {
 		switch (what)
@@ -88,8 +104,17 @@ public:
 		case Microphone:
 			return "Microphone";
 		}
+		throw std::logic_error("Equipment Type Does Not Exist.");
 	}
 };
+
+Equipment::EquipmentType typeEquipment(const std::string& type) {
+	if (type == "Whiteboard") return Equipment::Whiteboard;
+	else if (type == "Projector") return Equipment::Projector;
+	else if (type == "Speaker") return Equipment::Speaker;
+	else if (type == "Microphone") return Equipment::Microphone;
+	throw std::logic_error("Equipment Type Does Not Exist.");
+}
 
 std::string typeName(const Equipment::EquipmentType& resource) {
 	switch (resource) {
@@ -102,4 +127,5 @@ std::string typeName(const Equipment::EquipmentType& resource) {
 	case Equipment::Microphone:
 		return "Microphone";
 	}
+	throw std::logic_error("Equipment Type Does Not Exist.");
 }

@@ -26,19 +26,30 @@ public:
 
 		return new Location(id.c_str(), location);
 	}
+	Location::RoomType locationRoom(const std::string& id) {
+		std::string stmt = "SELECT type FROM resources WHERE resourceID='" + id + "';";
+		return typeLocation(database->execAndGet(stmt.c_str()).getText());
+	}
+	std::string roomID(const Location::RoomType& room) {
+		std::string stmt = "SELECT resourceID FROM resources WHERE type='" + typeName(room) + "';";
+		return database->execAndGet(stmt.c_str()).getText();
+	}
+
 	const std::string addEquipment(const Equipment::EquipmentType& resource) {
 		std::string stmt = typeName(resource), id = uuidGenerator->getUUID().str();
 		stmt = "INSERT INTO resources(resourceID, type) VALUES ('" + id + "', '" + stmt + "')";
 		database->exec(stmt.c_str());
 		return id;
 	}
-	Equipment* regesterEquipment(const std::string& sessionID, const Equipment::EquipmentType& resource) {
-		// Need to implement sql query
-		// regesterEquipment will query database, filter out equipment in use that matches the day of the session (joins on the relations event/session and session/equipment), and returns the first available equipment of the specified type then updates the relation table
-		std::string id = uuidGenerator->getUUID().str();
-		Equipment* ret = new Equipment(id.c_str(), resource);
-		return ret;
+	Equipment::EquipmentType equipmentType(const std::string& id) {
+		std::string stmt = "SELECT type FROM resources WHERE resourceID='" + id + "';";
+		return typeEquipment(database->execAndGet(stmt.c_str()).getText());
 	}
+	Equipment* findEquipment(const std::string& id) {
+		return new Equipment(id, equipmentType(id));
+	}
+	Equipment* regesterEquipment(const std::string& sessionID, const Equipment::EquipmentType& resource) { return nullptr; }
+
 	void reportResources() const {
 		SQLite::Statement stmt(*database, "SELECT * FROM RESOURCES;");
 		std::cerr << "Resources Table:\n";
@@ -63,7 +74,30 @@ private:
 class EventManager {
 public:
 	EventManager(SQLite::Database* db, UUIDv4::UUIDGenerator<std::mt19937_64>* generator) : database(db), uuidGenerator(generator) {}
-	
+	std::string newSession(const std::string& name, const std::string& start, const std::string& end) {
+		std::string id = uuidGenerator->getUUID().str();
+		std::string stmt = "INSERT INTO sessions (sessionID, name, startTime, endTime, isSpecalSession) VALUES('" + id + "', '" + name + "', '" + start + "', '" + end + "', 0);";
+		database->exec(stmt.c_str());
+		return id;
+	}
+	std::string sessionName(const std::string& id) const {
+		std::string stmt = "SELECT name FROM sessions WHERE sessionID='" + id + "';";
+		return database->execAndGet(stmt.c_str()).getString();
+	}
+	std::string sessionStart(const std::string& id) const {
+		std::string stmt = "SELECT startTime FROM sessions WHERE sessionID='" + id + "';";
+		return database->execAndGet(stmt.c_str()).getString();
+	}
+	std::string sessionEnd(const std::string& id) const {
+		std::string stmt = "SELECT endTime FROM sessions WHERE sessionID='" + id + "';";
+		return database->execAndGet(stmt.c_str()).getString();
+	}
+	Location* sessionLocation(const std::string& id) const {
+		std::string stmt = "SELECT resources.resourceID, resources.type FROM sessionResources JOIN resources ON sessionResources.resourceID = resources.resourceID WHERE sessionResources.sessionID='" + id + "' AND type IN ('Roosevelt', 'Lincoln', 'Washington');";
+		SQLite::Statement select(*database, stmt.c_str());
+		select.executeStep();
+		return new Location(select.getColumn(0).getString(), typeLocation(select.getColumn(1).getString()));
+	}
 private:
 	SQLite::Database* database;
 	UUIDv4::UUIDGenerator<std::mt19937_64>* uuidGenerator;
@@ -105,18 +139,16 @@ public:
 
 	void init() {
 		db.exec("CREATE TABLE IF NOT EXISTS events(eventID TEXT PRIMARY KEY, name TEXT NOT NULL, date TEXT NOT NULL);");
-		db.exec("CREATE TABLE IF NOT EXISTS sessions(sessionID TEXT PRIMARY KEY, name TEXT NOT NULL, startTime TEXT NOT NULL, endTime TEXT NOT NULL, isSpecalSession TEXT NOT NULL);");
+		db.exec("CREATE TABLE IF NOT EXISTS sessions(sessionID TEXT PRIMARY KEY, name TEXT NOT NULL, startTime TEXT NOT NULL, endTime TEXT NOT NULL, isSpecalSession INTEGER NOT NULL);");
 		db.exec("CREATE TABLE IF NOT EXISTS resources(resourceID TEXT PRIMARY KEY, type TEXT NOT NULL);");
 		db.exec("CREATE TABLE IF NOT EXISTS guests(guestID TEXT PRIMARY KEY, name TEXT NOT NULL);");
 
-		db.exec("PRAGMA foreign_keys = ON;");
-
 		// Relation Tables
-		db.exec("CREATE TABLE IF NOT EXISTS eventSessions(eventID TEXT NOT NULL, sessionID NOT NULL, PRIMARY KEY (eventID, sessionID), FOREIGN KEY (eventID) REFERENCES event (eventID), FOREIGN KEY (sessionID) REFERENCES session (sessionID));");
-		db.exec("CREATE TABLE IF NOT EXISTS sessionResources(sessionID TEXT NOT NULL, resourceID TEXT NOT NULL, PRIMARY KEY (sessionID, resourceID), FOREIGN KEY (sessionID) REFERENCES session (sessionID), FOREIGN KEY (resourceID) REFERENCES resource (resourceID));");
-		db.exec("CREATE TABLE IF NOT EXISTS eventGuests(eventID TEXT NOT NULL, guestID TEXT NOT NULL, PRIMARY KEY (eventID, guestID), FOREIGN KEY (eventID) REFERENCES event (eventID), FOREIGN KEY (guestID) REFERENCES guest (guestID));");
-		db.exec("CREATE TABLE IF NOT EXISTS specalSessionGuests(sessionID TEXT NOT NULL, guestID TEXT NOT NULL, PRIMARY KEY (sessionID, guestID), FOREIGN KEY (sessionID) REFERENCES session (sessionID), FOREIGN KEY (guestID) REFERENCES guest (guestid));");
-		db.exec("CREATE TABLE IF NOT EXISTS presenters(guestID TEXT NOT NULL, sessionID TEXT NOT NULL, PRIMARY KEY (guestID, sessionID), FOREIGN KEY (guestID) REFERENCES guest (guestID), FOREIGN KEY (sessionID) REFERENCES session (sessionID));");
+		db.exec("CREATE TABLE IF NOT EXISTS eventSessions(eventID TEXT NOT NULL, sessionID NOT NULL, PRIMARY KEY (eventID, sessionID));");
+		db.exec("CREATE TABLE IF NOT EXISTS sessionResources(sessionID TEXT NOT NULL, resourceID TEXT NOT NULL, PRIMARY KEY (sessionID, resourceID));");
+		db.exec("CREATE TABLE IF NOT EXISTS eventGuests(eventID TEXT NOT NULL, guestID TEXT NOT NULL, PRIMARY KEY (eventID, guestID));");
+		db.exec("CREATE TABLE IF NOT EXISTS specalSessionGuests(sessionID TEXT NOT NULL, guestID TEXT NOT NULL, PRIMARY KEY (sessionID, guestID));");
+		db.exec("CREATE TABLE IF NOT EXISTS presenters(guestID TEXT NOT NULL, sessionID TEXT NOT NULL, PRIMARY KEY (guestID, sessionID));");
 
 		// Add Confrence Rooms to db
 		if (db.execAndGet("SELECT COUNT(resourceID) FROM resources WHERE type='Roosevelt';").getInt() == 0) {
@@ -139,12 +171,13 @@ public:
 		//SQLite::Statement check(db, "SELECT name FROM sqlite_schema WHERE type='table' AND name NOT LIKE 'sqlite_%';");
 		//while(check.executeStep())
 		//	std::cerr << check.getColumn(0) << std::endl;
-
-		//Print resources Table
-		//SQLite::Statement check(db, "SELECT * FROM resources;");
-		//while (check.executeStep())
-		//	std::cerr << check.getColumn(0) << '\t' << check.getColumn(1) << std::endl;
 	}
 };
 
 ConferenceManager* ConferenceManager::instance = NULL;
+
+//Additional Constructors
+Location::Location(const std::string& id) : Resource(id), room(ConferenceManager::getInstance()->resourceManager->locationRoom(id)) {}
+Location::Location(const Location::RoomType& hostRoom) : Resource(ConferenceManager::getInstance()->resourceManager->roomID(hostRoom)), room(hostRoom) {}
+Equipment::Equipment(const std::string& id) : Resource(id), what(ConferenceManager::getInstance()->resourceManager->equipmentType(id)) {}
+Equipment::Equipment(const EquipmentType& type) : Resource(ConferenceManager::getInstance()->resourceManager->addEquipment(type)), what(type) { }

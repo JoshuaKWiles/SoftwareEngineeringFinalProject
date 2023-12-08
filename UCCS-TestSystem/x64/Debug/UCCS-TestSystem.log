@@ -1,4 +1,2 @@
 ﻿  UCCS-TestSystem.cpp
-C:\Users\Steven Dnako\Documents\GitHub\SoftwareEngineeringFinalProject\UniversityConferenceCenterSystem\Resource.h(55): warning C4715: 'typeName': not all control paths return a value
-C:\Users\Steven Dnako\Documents\GitHub\SoftwareEngineeringFinalProject\UniversityConferenceCenterSystem\Resource.h(105): warning C4715: 'typeName': not all control paths return a value
   UCCS-TestSystem.vcxproj -> C:\Users\Steven Dnako\Documents\GitHub\SoftwareEngineeringFinalProject\x64\Debug\UCCS-TestSystem.exe

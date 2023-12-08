@@ -17,7 +17,20 @@ public:
 
 class Session : public ScheduleEvent {
 public:
-	Session(const std::string& id, const std::string& name_, Location::RoomType room, const std::string& start, const std::string& end) : ScheduleEvent(id, name_), location(ConferenceManager::getInstance()->resourceManager->regesterLocation(scheduleID, room)), startTime(start), endTime(end) { }
+	Session(const std::string& name_, Location::RoomType room, const std::string& start, const std::string& end) : 
+					ScheduleEvent(ConferenceManager::getInstance()->eventManager->newSession(name_,start, end), name_), 
+					location(ConferenceManager::getInstance()->resourceManager->regesterLocation(scheduleID, room)), 
+					startTime(start), 
+					endTime(end) 
+					{ }
+
+	Session(const std::string& id) :
+					ScheduleEvent(id, ConferenceManager::getInstance()->eventManager->sessionName(id)),
+					location(ConferenceManager::getInstance()->eventManager->sessionLocation(id)),
+					startTime(ConferenceManager::getInstance()->eventManager->sessionStart(id)),
+					endTime(ConferenceManager::getInstance()->eventManager->sessionEnd(id))
+					{ }
+	
 	~Session() {
 		delete location;
 		for (auto resource : equipmentList) delete resource;
