@@ -26,7 +26,7 @@ public:
 
 		return new Location(id.c_str(), location);
 	}
-	Location::RoomType locationRoom(const std::string& id) {
+	Location::RoomType room(const std::string& id) {
 		std::string stmt = "SELECT type FROM resources WHERE resourceID='" + id + "';";
 		return typeLocation(database->execAndGet(stmt.c_str()).getText());
 	}
@@ -41,12 +41,12 @@ public:
 		database->exec(stmt.c_str());
 		return id;
 	}
-	Equipment::EquipmentType equipmentType(const std::string& id) {
+	Equipment::EquipmentType type(const std::string& id) {
 		std::string stmt = "SELECT type FROM resources WHERE resourceID='" + id + "';";
 		return typeEquipment(database->execAndGet(stmt.c_str()).getText());
 	}
-	Equipment* findEquipment(const std::string& id) {
-		return new Equipment(id, equipmentType(id));
+	Equipment* instance(const std::string& id) {
+		return new Equipment(id, type(id));
 	}
 	Equipment* regesterEquipment(const std::string& sessionID, const Equipment::EquipmentType& resource) { return nullptr; }
 
@@ -177,7 +177,7 @@ public:
 ConferenceManager* ConferenceManager::instance = NULL;
 
 //Additional Constructors
-Location::Location(const std::string& id) : Resource(id), room(ConferenceManager::getInstance()->resourceManager->locationRoom(id)) {}
+Location::Location(const std::string& id) : Resource(id), room(ConferenceManager::getInstance()->resourceManager->room(id)) {}
 Location::Location(const Location::RoomType& hostRoom) : Resource(ConferenceManager::getInstance()->resourceManager->roomID(hostRoom)), room(hostRoom) {}
-Equipment::Equipment(const std::string& id) : Resource(id), what(ConferenceManager::getInstance()->resourceManager->equipmentType(id)) {}
+Equipment::Equipment(const std::string& id) : Resource(id), what(ConferenceManager::getInstance()->resourceManager->type(id)) {}
 Equipment::Equipment(const EquipmentType& type) : Resource(ConferenceManager::getInstance()->resourceManager->addEquipment(type)), what(type) { }
