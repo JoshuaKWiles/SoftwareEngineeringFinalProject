@@ -7,10 +7,9 @@
 class Resource {
 public:
 	const std::string id;
-	Resource(const char* resouceID) : id(resouceID) { }
 	Resource(const std::string& resourceID) : id(resourceID) { }
-	virtual long double getCost() = 0;
-	virtual const char* getName() = 0;
+	virtual long double getCost() const = 0;
+	virtual std::string getName() const = 0;
 };
 
 class Location : public Resource {
@@ -21,9 +20,8 @@ public:
 		Washington
 	};
 	const RoomType room;
-	Location(const char* locationID, RoomType hostRoom) : Resource(locationID), room(hostRoom) { }
-	Location(const std::string locationID, RoomType hostRoom) : Resource(locationID), room(hostRoom) { }
-	long double getCost() {
+	Location(const std::string& locationID, const RoomType& hostRoom) : Resource(locationID), room(hostRoom) { }
+	long double getCost() const {
 		switch (room){
 		case Roosevelt:
 			return 300.0l;
@@ -31,11 +29,9 @@ public:
 			return 400.0l;
 		case Washington:
 			return 500.0l;
-		default:
-			return 0.0l; // There is an error if this happens
 		}
 	}
-	const char* getName() {
+	std::string getName() const {
 		switch (room){
 		case Roosevelt:
 			return "Roosevelt";
@@ -43,11 +39,20 @@ public:
 			return "Lincoln";
 		case Washington:
 			return "Washington";
-		default:
-			return "Location Error"; // There is an error if this happens
 		}
 	}
 };
+
+std::string typeName(const Location::RoomType& resource) {
+	switch (resource) {
+	case Location::Roosevelt:
+		return "Roosevelt";
+	case Location::Lincoln:
+		return "Lincoln";
+	case Location::Washington:
+		return "Washington";
+	}
+}
 
 class Equipment : public Resource {
 public:
@@ -58,9 +63,8 @@ public:
 		Microphone
 	};
 	const EquipmentType what;
-	Equipment(const char* equipmentID, EquipmentType type) : Resource(equipmentID), what(type) { }
-	Equipment(const std::string& equipmentID, EquipmentType type) : Resource(equipmentID), what(type) { }
-	long double getCost() {
+	Equipment(const std::string& equipmentID, const EquipmentType& type) : Resource(equipmentID), what(type) { }
+	long double getCost() const {
 		switch (what){
 		case Whiteboard:
 			return 60.0l;
@@ -70,11 +74,9 @@ public:
 			return 50.0l;
 		case Microphone:
 			return 30.0l;
-		default:
-			return 0.0l; // There is an error if this happens
 		}
 	}
-	const char* getName() {
+	std::string getName() const {
 		switch (what)
 		{
 		case Whiteboard:
@@ -85,8 +87,19 @@ public:
 			return "Speaker";
 		case Microphone:
 			return "Microphone";
-		default:
-			return "Euipment Error";
 		}
 	}
 };
+
+std::string typeName(const Equipment::EquipmentType& resource) {
+	switch (resource) {
+	case Equipment::Whiteboard:
+		return "Whiteboard";
+	case Equipment::Projector:
+		return "Projector";
+	case Equipment::Speaker:
+		return "Speaker";
+	case Equipment::Microphone:
+		return "Microphone";
+	}
+}

@@ -5,11 +5,11 @@
 #include <vector>
 class ScheduleEvent {
 public:
-	ScheduleEvent(const char* id, const char* name_) : scheduleID(id), name(name_) {}
+	ScheduleEvent(const std::string& id, const std::string& name_) : scheduleID(id), name(name_) {}
 
-	virtual long double getCost() = 0;
-	virtual std::string getSchedule() = 0;
-	virtual std::vector<Presenter> getPresenter() = 0;
+	virtual long double getCost() const = 0;
+	virtual std::string getSchedule() const = 0;
+	virtual std::vector<Presenter> getPresenter() const = 0;
 
 	const std::string scheduleID;
 	const std::string name;
@@ -17,7 +17,7 @@ public:
 
 class Session : public ScheduleEvent {
 public:
-	Session(const char* id, const char* name_, Location::RoomType room, const char* start, const char* end) : ScheduleEvent(id, name_), location(ConferenceManager::getInstance()->resourceManager->regesterLocation(id, room)), startTime(start), endTime(end) { }
+	Session(const std::string& id, const std::string& name_, Location::RoomType room, const std::string& start, const std::string& end) : ScheduleEvent(id, name_), location(ConferenceManager::getInstance()->resourceManager->regesterLocation(scheduleID, room)), startTime(start), endTime(end) { }
 	~Session() {
 		delete location;
 		for (auto resource : equipmentList) delete resource;
@@ -27,15 +27,15 @@ public:
 	const std::string endTime;
 	Location* const location;
 
-	long double getCost() {
+	long double getCost() const {
 		long double total = location->getCost();
 		if(!equipmentList.empty())
 			for (auto resource : equipmentList) total += resource->getCost();
 		return total;
 	}
 
-	std::string getSchedule() { return '(' + startTime + " - " + endTime + ')'; }
-	std::vector<Presenter> getPresenter() {
+	std::string getSchedule() const { return '(' + startTime + " - " + endTime + ')'; }
+	std::vector<Presenter> getPresenter() const {
 		std::vector<Presenter> ret;
 		// Need to implement sql query
 		//getPresenter will query the database and return all presenter associated with the session id
@@ -53,7 +53,7 @@ public:
 	}
 
 	// reprotResources is an alternate take on getResources
-	std::string reportResources() {
+	std::string reportResources() const {
 		std::string ret = "";
 		if (!equipmentList.empty()) {
 			for (auto equipment : equipmentList) {
@@ -68,16 +68,4 @@ public:
 
 private:
 	std::vector<Equipment*> equipmentList;
-};
-
-class Event : public ScheduleEvent {
-public:
-	Event(const char* id, const char* name, const char* date_) : ScheduleEvent(id, name), date(date_) {}
-
-	long double getCost() { return 0.0l; }
-	
-
-	const std::string date;
-private:
-
 };

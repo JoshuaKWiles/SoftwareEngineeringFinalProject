@@ -13,7 +13,7 @@
 class ResourceManager {
 public:
 	ResourceManager(SQLite::Database* db, UUIDv4::UUIDGenerator<std::mt19937_64>* generator) : database(db), uuidGenerator(generator) {}
-	Location* regesterLocation(std::string sessionID, Location::RoomType location) {
+	Location* regesterLocation(const std::string& sessionID, const Location::RoomType& location) {
 		std::string stmt = typeName(location);
 
 		stmt = "SELECT resourceID FROM resources WHERE type ='" + stmt + "';";
@@ -26,20 +26,20 @@ public:
 
 		return new Location(id.c_str(), location);
 	}
-	std::string addEquipment(Equipment::EquipmentType resource) {
+	const std::string addEquipment(const Equipment::EquipmentType& resource) {
 		std::string stmt = typeName(resource), id = uuidGenerator->getUUID().str();
 		stmt = "INSERT INTO resources(resourceID, type) VALUES ('" + id + "', '" + stmt + "')";
 		database->exec(stmt.c_str());
 		return id;
 	}
-	Equipment* regesterEquipment(std::string sessionID, Equipment::EquipmentType resource) {
+	Equipment* regesterEquipment(const std::string& sessionID, const Equipment::EquipmentType& resource) {
 		// Need to implement sql query
 		// regesterEquipment will query database, filter out equipment in use that matches the day of the session (joins on the relations event/session and session/equipment), and returns the first available equipment of the specified type then updates the relation table
 		std::string id = uuidGenerator->getUUID().str();
 		Equipment* ret = new Equipment(id.c_str(), resource);
 		return ret;
 	}
-	void reportResources() {
+	void reportResources() const {
 		SQLite::Statement stmt(*database, "SELECT * FROM RESOURCES;");
 		std::cerr << "Resources Table:\n";
 		while (stmt.executeStep())
@@ -48,37 +48,22 @@ public:
 	}
 
 private:
-	std::string typeName(Location::RoomType resource) {
-		switch (resource) {
-		case Location::Roosevelt:
-			return "Roosevelt";
-		case Location::Lincoln:
-			return "Lincoln";
-		case Location::Washington:
-			return "Washington";
-		}
-	}
-	std::string typeName(Equipment::EquipmentType resource) {
-		switch (resource) {
-		case Equipment::Whiteboard:
-			return "Whiteboard";
-		case Equipment::Projector:
-			return "Projector";
-		case Equipment::Speaker:
-			return "Speaker";
-		case Equipment::Microphone:
-			return "Microphone";
-		}
-	}
 
 	SQLite::Database* database;
 	UUIDv4::UUIDGenerator<std::mt19937_64>* uuidGenerator;
 };
 
+class GuestManager {
+public:
+
+private:
+
+};
+
 class EventManager {
 public:
 	EventManager(SQLite::Database* db, UUIDv4::UUIDGenerator<std::mt19937_64>* generator) : database(db), uuidGenerator(generator) {}
-
+	
 private:
 	SQLite::Database* database;
 	UUIDv4::UUIDGenerator<std::mt19937_64>* uuidGenerator;
