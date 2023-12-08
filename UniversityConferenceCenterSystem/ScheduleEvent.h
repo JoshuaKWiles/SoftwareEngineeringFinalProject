@@ -67,6 +67,19 @@ public:
 		else ret = "No Equipment Used.";
 		return ret;
 	}
+
 private:
 	std::vector<Equipment*> equipmentList;
+};
+
+class Event : public ScheduleEvent {
+public:
+	Event(const char* id, const char* name, const char* date_) : ScheduleEvent(id, name), date(date_) {}
+
+	long double getCost() { return 0.0l; }
+	
+
+	const std::string date;
+private:
+
 };

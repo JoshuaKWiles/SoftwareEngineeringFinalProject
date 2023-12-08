@@ -280,5 +280,9 @@ int main()
 			}
 		}
 	}
+
+	ConferenceManager& manager = *ConferenceManager::getInstance();
+	manager.init();
+
 	return EXIT_SUCCESS;
 }
