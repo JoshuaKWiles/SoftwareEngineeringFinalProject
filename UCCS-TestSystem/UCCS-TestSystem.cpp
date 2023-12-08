@@ -9,6 +9,9 @@
 #include "ScheduleEvent.h"
 int main()
 {
+	ConferenceManager& manager = *ConferenceManager::getInstance();
+	manager.init();
+
 	{// Test Resource Classes
 		{// Test Location Class
 			{// Test Constructors on initializer type
@@ -137,152 +140,7 @@ int main()
 
 			assert(test1 == test2);
 		}
-		{// Test Session class (Calls ConferenceManager::getInstance)
-			{// Test Initialization Values
-				Session test("123", "Test Session", Location::Roosevelt, "3:00 PM", "5:00 PM");
-
-				// Test Initalizaton Values
-				assert(test.scheduleID == "123");
-				assert(test.name == "Test Session");
-				assert(test.startTime == "3:00 PM");
-				assert(test.endTime == "5:00 PM");
-
-				assert(test.location != nullptr);
-			}
-			{// Test getSchedule
-				Session test("123", "Test Session", Location::Roosevelt, "3:00 PM", "5:00 PM");
-
-				assert(test.getSchedule() == "(3:00 PM - 5:00 PM)");
-			}
-			{// Test Session location
-				{// Test with Roosevelt
-					Session test("123", "Test Session", Location::Roosevelt, "3:00 PM", "5:00 PM");
-
-					assert(test.location->room == Location::Roosevelt);
-					assert(test.location->getName() == "Roosevelt");
-					assert(test.location->getCost() == 300.0l);
-				}
-				{// Test with Lincoln
-					Session test("123", "Test Session", Location::Lincoln, "3:00 PM", "5:00 PM");
-
-					assert(test.location->room == Location::Lincoln);
-					assert(test.location->getName() == "Lincoln");
-					assert(test.location->getCost() == 400.0l);
-				}
-				{// Test with Washington
-					Session test("123", "Test Session", Location::Washington, "3:00 PM", "5:00 PM");
-
-					assert(test.location->room == Location::Washington);
-					assert(test.location->getName() == "Washington");
-					assert(test.location->getCost() == 500.0l);
-				}
-			}
-			{// Test getCost with out Equipmenet
-				{// Test with Roosevelt
-					Session test("123", "Test Session", Location::Roosevelt, "3:00 PM", "5:00 PM");
-
-					assert(test.getCost() == test.location->getCost());
-				}
-				{// Test with Lincoln
-					Session test("123", "Test Session", Location::Lincoln, "3:00 PM", "5:00 PM");
-
-					assert(test.getCost() == test.location->getCost());
-				}
-				{// Test with Washington
-					Session test("123", "Test Session", Location::Washington, "3:00 PM", "5:00 PM");
-
-					assert(test.getCost() == test.location->getCost());
-				}
-			}
-			{// Test Adding Equipment
-				Session test("123", "Test Session", Location::Roosevelt, "3:00 PM", "5:00 PM");
-
-				//std::cerr << test.reportResources() << std::endl;
-				assert(test.reportResources() == "No Equipment Used.");
-
-				test.addResource(Equipment::Whiteboard);
-				//std::cerr << test.reportResources() << std::endl;
-				assert(test.reportResources() == "Whiteboard");
-
-				test.addResource(Equipment::Projector);
-				//std::cerr << test.reportResources() << std::endl;
-				assert(test.reportResources() == "Whiteboard Projector");
-
-				test.addResource(Equipment::Speaker);
-				//std::cerr << test.reportResources() << std::endl;
-				assert(test.reportResources() == "Whiteboard Projector Speaker");
-
-				test.addResource(Equipment::Microphone);
-				//std::cerr << test.reportResources() << std::endl;
-				assert(test.reportResources() == "Whiteboard Projector Speaker Microphone");
-			}
-			{// Test getCost with Equipmenet
-				{// Test with Roosevelt
-					Session test("123", "Test Session", Location::Roosevelt, "3:00 PM", "5:00 PM");
-
-					// Add Whiteboard
-					test.addResource(Equipment::Whiteboard);
-					assert(test.getCost() == test.location->getCost() + 60.0l);
-
-					// Add Projector
-					test.addResource(Equipment::Projector);
-					assert(test.getCost() == test.location->getCost() + 60.0l + 100.0l);
-
-					// Add Speaker
-					test.addResource(Equipment::Speaker);
-					assert(test.getCost() == test.location->getCost() + 60.0l + 100.0l + 50.0l);
-
-					// Add Microphone
-					test.addResource(Equipment::Microphone);
-					assert(test.getCost() == test.location->getCost() + 60.0l + 100.0l + 50.0l + 30.0l);
-				}
-				{// Test with Lincoln
-					Session test("123", "Test Session", Location::Lincoln, "3:00 PM", "5:00 PM");
-
-					// Add Whiteboard
-					test.addResource(Equipment::Whiteboard);
-					assert(test.getCost() == test.location->getCost() + 60.0l);
-
-					// Add Projector
-					test.addResource(Equipment::Projector);
-					assert(test.getCost() == test.location->getCost() + 60.0l + 100.0l);
-
-					// Add Speaker
-					test.addResource(Equipment::Speaker);
-					assert(test.getCost() == test.location->getCost() + 60.0l + 100.0l + 50.0l);
-
-					// Add Microphone
-					test.addResource(Equipment::Microphone);
-					assert(test.getCost() == test.location->getCost() + 60.0l + 100.0l + 50.0l + 30.0l);
-				}
-				{// Test with Washington
-					Session test("123", "Test Session", Location::Washington, "3:00 PM", "5:00 PM");
-
-					// Add Whiteboard
-					test.addResource(Equipment::Whiteboard);
-					assert(test.getCost() == test.location->getCost() + 60.0l);
-
-					// Add Projector
-					test.addResource(Equipment::Projector);
-					assert(test.getCost() == test.location->getCost() + 60.0l + 100.0l);
-
-					// Add Speaker
-					test.addResource(Equipment::Speaker);
-					assert(test.getCost() == test.location->getCost() + 60.0l + 100.0l + 50.0l);
-
-					// Add Microphone
-					test.addResource(Equipment::Microphone);
-					assert(test.getCost() == test.location->getCost() + 60.0l + 100.0l + 50.0l + 30.0l);
-				}
-			}
-			{// Test getPresenter
-
-			}
-		}
 	}
-
-	ConferenceManager& manager = *ConferenceManager::getInstance();
-	manager.init();
 
 	return EXIT_SUCCESS;
 }

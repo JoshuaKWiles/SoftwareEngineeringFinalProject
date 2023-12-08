@@ -1,5 +1,9 @@
 #pragma once
+#include "uuid_v4.h"
+#include "SQLiteCpp.h"
+
 #include <string>
+
 struct Guest{
 	const std::string guestID;
 	const std::string name;
@@ -19,4 +23,11 @@ struct Presenter : public Guest{
 
 	Presenter(const Guest& guest, const char* presenterID) : Guest(guest), presenterID(presenterID) { }
 	Presenter(const Guest& guest, const std::string presenterID) : Guest(guest), presenterID(presenterID) { }
+};
+
+class GuestManager {
+public:
+
+private:
+
 };

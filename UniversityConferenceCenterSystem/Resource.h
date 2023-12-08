@@ -94,12 +94,31 @@ public:
 class ResourceManager {
 public:
 	ResourceManager(SQLite::Database* db, UUIDv4::UUIDGenerator<std::mt19937_64>* generator) : database(db), uuidGenerator(generator) {}
-	Location* regesterLocation(const char* sessionID, Location::RoomType location) { 
-		// Need to implement sql query
-		// regesterLocation will query database and return the uuid of the resource with the specified room type and update the relation table
-		std::string id = uuidGenerator->getUUID().str();
-		Location* ret = new Location(id.c_str(), location);
-		return ret;
+	Location* regesterLocation(std::string sessionID, Location::RoomType location) { 
+		std::string stmt;
+
+		switch (location)
+		{
+		case Location::Roosevelt:
+			stmt = "Roosevelt";
+			break;
+		case Location::Lincoln:
+			stmt = "Lincoln";
+			break;
+		case Location::Washington:
+			stmt = "Washington";
+			break;
+		}
+
+		stmt = "SELECT resourceID FROM resources WHERE type ='" + stmt + "';";
+		stmt = database->execAndGet(stmt.c_str()).getString();
+
+		std::string id = stmt;
+
+		stmt = "INSERT INTO sessionResources (sessionID, resourceID) VALUES ('" + sessionID + "', '" + stmt + "');";
+		database->exec(stmt.c_str());
+
+		return new Location(id.c_str(), location);
 	}
 	Equipment* regesterEquipment(const char* sessionID, Equipment::EquipmentType resource) {
 		// Need to implement sql query

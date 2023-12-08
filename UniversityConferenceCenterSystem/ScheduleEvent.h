@@ -1,7 +1,5 @@
 #pragma once
 #include "ConferenceCenterSystem.h"
-#include "Resource.h"
-#include "Guest.h"
 
 #include <string>
 #include <vector>
@@ -82,4 +80,13 @@ public:
 	const std::string date;
 private:
 
+};
+
+class EventManager {
+public:
+	EventManager(SQLite::Database* db, UUIDv4::UUIDGenerator<std::mt19937_64>* generator) : database(db), uuidGenerator(generator) {}
+
+private:
+	SQLite::Database* database;
+	UUIDv4::UUIDGenerator<std::mt19937_64>* uuidGenerator;
 };
