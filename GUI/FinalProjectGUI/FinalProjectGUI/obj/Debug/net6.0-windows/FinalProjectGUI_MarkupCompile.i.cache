@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\Steven Dnako\Documents\GitHub\SoftwareEngineeringFinalProject\GUI\FinalProjectGUI\FinalProjectGUI\obj\Debug\net6.0-windows\
+C:\Users\kingj\source\repos\SoftwareEngineeringFinalProject\SoftwareEngineeringFinalProject\GUI\FinalProjectGUI\FinalProjectGUI\obj\Debug\net6.0-windows\
 FinalProjectGUI
 none
 false
 TRACE;DEBUG;NET;NET6_0;NETCOREAPP
-C:\Users\Steven Dnako\Documents\GitHub\SoftwareEngineeringFinalProject\GUI\FinalProjectGUI\FinalProjectGUI\App.xaml
-4-511376296
+C:\Users\kingj\source\repos\SoftwareEngineeringFinalProject\SoftwareEngineeringFinalProject\GUI\FinalProjectGUI\FinalProjectGUI\App.xaml
+5-1647193438
 
-9-1883603844
-194-1977528901
-EmployeeInterface.xaml;EventInfo.xaml;MainWindow.xaml;Schedule.xaml;
+10-1052019470
+1941142463650
+EmployeeInterface.xaml;EventInfo.xaml;MaintenanceReportxaml.xaml;MainWindow.xaml;Schedule.xaml;
 
 False
 
