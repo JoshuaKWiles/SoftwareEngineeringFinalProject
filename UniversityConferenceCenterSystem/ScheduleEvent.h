@@ -81,12 +81,3 @@ public:
 private:
 
 };
-
-class EventManager {
-public:
-	EventManager(SQLite::Database* db, UUIDv4::UUIDGenerator<std::mt19937_64>* generator) : database(db), uuidGenerator(generator) {}
-
-private:
-	SQLite::Database* database;
-	UUIDv4::UUIDGenerator<std::mt19937_64>* uuidGenerator;
-};

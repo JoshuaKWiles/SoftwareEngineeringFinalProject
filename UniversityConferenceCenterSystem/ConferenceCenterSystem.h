@@ -10,6 +10,80 @@
 #include "Resource.h"
 #include "Guest.h"
 
+class ResourceManager {
+public:
+	ResourceManager(SQLite::Database* db, UUIDv4::UUIDGenerator<std::mt19937_64>* generator) : database(db), uuidGenerator(generator) {}
+	Location* regesterLocation(std::string sessionID, Location::RoomType location) {
+		std::string stmt = typeName(location);
+
+		stmt = "SELECT resourceID FROM resources WHERE type ='" + stmt + "';";
+		stmt = database->execAndGet(stmt.c_str()).getString();
+
+		std::string id = stmt;
+
+		stmt = "INSERT INTO sessionResources (sessionID, resourceID) VALUES ('" + sessionID + "', '" + stmt + "');";
+		database->exec(stmt.c_str());
+
+		return new Location(id.c_str(), location);
+	}
+	std::string addEquipment(Equipment::EquipmentType resource) {
+		std::string stmt = typeName(resource), id = uuidGenerator->getUUID().str();
+		stmt = "INSERT INTO resources(resourceID, type) VALUES ('" + id + "', '" + stmt + "')";
+		database->exec(stmt.c_str());
+		return id;
+	}
+	Equipment* regesterEquipment(std::string sessionID, Equipment::EquipmentType resource) {
+		// Need to implement sql query
+		// regesterEquipment will query database, filter out equipment in use that matches the day of the session (joins on the relations event/session and session/equipment), and returns the first available equipment of the specified type then updates the relation table
+		std::string id = uuidGenerator->getUUID().str();
+		Equipment* ret = new Equipment(id.c_str(), resource);
+		return ret;
+	}
+	void reportResources() {
+		SQLite::Statement stmt(*database, "SELECT * FROM RESOURCES;");
+		std::cerr << "Resources Table:\n";
+		while (stmt.executeStep())
+			std::cerr << stmt.getColumn(0).getText() << '\t' << stmt.getColumn(1) << '\n';
+		std::cerr << std::endl;
+	}
+
+private:
+	std::string typeName(Location::RoomType resource) {
+		switch (resource) {
+		case Location::Roosevelt:
+			return "Roosevelt";
+		case Location::Lincoln:
+			return "Lincoln";
+		case Location::Washington:
+			return "Washington";
+		}
+	}
+	std::string typeName(Equipment::EquipmentType resource) {
+		switch (resource) {
+		case Equipment::Whiteboard:
+			return "Whiteboard";
+		case Equipment::Projector:
+			return "Projector";
+		case Equipment::Speaker:
+			return "Speaker";
+		case Equipment::Microphone:
+			return "Microphone";
+		}
+	}
+
+	SQLite::Database* database;
+	UUIDv4::UUIDGenerator<std::mt19937_64>* uuidGenerator;
+};
+
+class EventManager {
+public:
+	EventManager(SQLite::Database* db, UUIDv4::UUIDGenerator<std::mt19937_64>* generator) : database(db), uuidGenerator(generator) {}
+
+private:
+	SQLite::Database* database;
+	UUIDv4::UUIDGenerator<std::mt19937_64>* uuidGenerator;
+};
+
 class ConferenceManager {
 private:
 	static ConferenceManager* instance;
@@ -17,9 +91,13 @@ private:
 	SQLite::Database db;
 	UUIDv4::UUIDGenerator<std::mt19937_64> uuidGenerator;
 
-	ConferenceManager() : db(SQLite::Database("ConferenceCenter.db", SQLite::OPEN_READWRITE | SQLite::OPEN_CREATE, 1, NULL)), resourceManager(new ResourceManager(&db, &uuidGenerator)) { std::atexit(&Destructor); }
+	ConferenceManager() : db(SQLite::Database("ConferenceCenter.db", SQLite::OPEN_READWRITE | SQLite::OPEN_CREATE, 1, NULL)),
+						  resourceManager(new ResourceManager(&db, &uuidGenerator)),
+						  eventManager(new EventManager(&db, &uuidGenerator))
+							{ std::atexit(&Destructor); }
 	~ConferenceManager() {
 		delete resourceManager;
+		delete eventManager;
 	}
 
 	static void Destructor() {
@@ -32,6 +110,7 @@ private:
 
 public:
 	ResourceManager* const resourceManager;
+	EventManager* const eventManager;
 	
 
 	static ConferenceManager* getInstance() {

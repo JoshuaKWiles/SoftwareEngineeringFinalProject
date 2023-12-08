@@ -12,6 +12,8 @@ int main()
 	ConferenceManager& manager = *ConferenceManager::getInstance();
 	manager.init();
 
+	manager.resourceManager->reportResources();
+
 	{// Test Resource Classes
 		{// Test Location Class
 			{// Test Constructors on initializer type
