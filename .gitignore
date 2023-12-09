@@ -2,10 +2,4 @@
 *.ipch
 .vs/UniversityConferenceCenterSystem/v17/ipch/AutoPCH/c9bf31a60a5f57f3/UCCS-TESTSYSTEM.ipch
 .editorconfig
-GUI/FinalProjectGUI/FinalProjectGUI/obj/Debug/net6.0-windows/FinalProjectGUI.designer.runtimeconfig.json
-GUI/FinalProjectGUI/FinalProjectGUI/obj/Debug/net6.0-windows/FinalProjectGUI.GeneratedMSBuildEditorConfig.editorconfig
-GUI/FinalProjectGUI/FinalProjectGUI/obj/Debug/net6.0-windows/FinalProjectGUI_MarkupCompile.i.cache
-GUI/FinalProjectGUI/FinalProjectGUI/obj/FinalProjectGUI.csproj.nuget.dgspec.json
-GUI/FinalProjectGUI/FinalProjectGUI/obj/FinalProjectGUI.csproj.nuget.g.props
-GUI/FinalProjectGUI/FinalProjectGUI/obj/project.assets.json
-GUI/FinalProjectGUI/FinalProjectGUI/obj/project.nuget.cache
+GUI/FinalProjectGUI/FinalProjectGUI/obj/
