@@ -106,14 +106,26 @@ public:
 		SQLite::Statement select(*database, stmt.c_str());
 		std::vector<Equipment*> ret;
 		while (select.executeStep())
-			ret.push_back(new Equipment(select.getColumn(0).getText(), typeEquipment(select.getColumn(1).getText())));
+			ret.push_back(new Equipment(select.getColumn(0).getString(), typeEquipment(select.getColumn(1).getString())));
 		return ret;
 	}
-	std::string newEvent(const std::string& name, const std::string& date) {
+	std::string newEvent(const std::string& name, const std::string& date, const double charge) {
 		const std::string eventID = uuidGenerator->getUUID().str();
-		const std::string stmt = "INSERT INTO events(eventID, name, date) VALUES('" + eventID + "', '" + name + "', '" + date + "');";
+		const std::string stmt = "INSERT INTO events(eventID, name, date, charge) VALUES('" + eventID + "', '" + name + "', '" + date + "', '" + std::to_string(charge) + "');";
 		database->exec(stmt.c_str());
 		return eventID;
+	}
+	std::string eventName(const std::string& eventID) {
+		std::string stmt = "SELECT name FROM events WHERE eventID='" + eventID + "';";
+		return database->execAndGet(stmt.c_str()).getString();
+	}
+	std::string eventDate(const std::string& eventID) {
+		std::string stmt = "SELECT date FROM events WHERE eventID='" + eventID + "';";
+		return database->execAndGet(stmt.c_str()).getString();
+	}
+	long double getCharge(const std::string& eventID) {
+		std::string stmt = "SELECT charge FROM events WHERE eventID='" + eventID + "';";
+		return database->execAndGet(stmt.c_str()).getDouble();
 	}
 private:
 	SQLite::Database* database;
@@ -155,10 +167,11 @@ public:
 	}
 
 	void init() {
-		db.exec("CREATE TABLE IF NOT EXISTS events(eventID TEXT PRIMARY KEY, name TEXT NOT NULL, date TEXT NOT NULL);");
+		db.exec("CREATE TABLE IF NOT EXISTS events(eventID TEXT PRIMARY KEY, name TEXT NOT NULL, date TEXT NOT NULL, charge REAL NOT NULL);");
 		db.exec("CREATE TABLE IF NOT EXISTS sessions(sessionID TEXT PRIMARY KEY, name TEXT NOT NULL, startTime TEXT NOT NULL, endTime TEXT NOT NULL, isSpecalSession INTEGER NOT NULL);");
 		db.exec("CREATE TABLE IF NOT EXISTS resources(resourceID TEXT PRIMARY KEY, type TEXT NOT NULL);");
 		db.exec("CREATE TABLE IF NOT EXISTS guests(guestID TEXT PRIMARY KEY, name TEXT NOT NULL);");
+		db.exec("CREATE TABLE IF NOT EXISTS specialSession(sessionID TEXT PRIMARY KEY, charge REAL NOT NULL);");
 
 		// Relation Tables
 		db.exec("CREATE TABLE IF NOT EXISTS eventSessions(eventID TEXT NOT NULL, sessionID NOT NULL, PRIMARY KEY (eventID, sessionID));");

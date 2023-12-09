@@ -1,17 +1,2 @@
-﻿  Backup.cpp
-C:\Users\kingj\source\repos\SoftwareEngineeringFinalProject\SoftwareEngineeringFinalProject\UniversityConferenceCenterSystem\SQLiteCpp\src\Backup.cpp(12,10): fatal error C1083: Cannot open include file: 'Backup.h': No such file or directory
-  Column.cpp
-C:\Users\kingj\source\repos\SoftwareEngineeringFinalProject\SoftwareEngineeringFinalProject\UniversityConferenceCenterSystem\SQLiteCpp\src\Column.cpp(11,10): fatal error C1083: Cannot open include file: 'Column.h': No such file or directory
-  Database.cpp
-C:\Users\kingj\source\repos\SoftwareEngineeringFinalProject\SoftwareEngineeringFinalProject\UniversityConferenceCenterSystem\SQLiteCpp\src\Database.cpp(11,10): fatal error C1083: Cannot open include file: 'Database.h': No such file or directory
-  Exception.cpp
-C:\Users\kingj\source\repos\SoftwareEngineeringFinalProject\SoftwareEngineeringFinalProject\UniversityConferenceCenterSystem\SQLiteCpp\src\Exception.cpp(11,10): fatal error C1083: Cannot open include file: 'Exception.h': No such file or directory
-  Savepoint.cpp
-C:\Users\kingj\source\repos\SoftwareEngineeringFinalProject\SoftwareEngineeringFinalProject\UniversityConferenceCenterSystem\SQLiteCpp\src\Savepoint.cpp(14,10): fatal error C1083: Cannot open include file: 'Assertion.h': No such file or directory
-  Statement.cpp
-C:\Users\kingj\source\repos\SoftwareEngineeringFinalProject\SoftwareEngineeringFinalProject\UniversityConferenceCenterSystem\SQLiteCpp\src\Statement.cpp(11,10): fatal error C1083: Cannot open include file: 'Statement.h': No such file or directory
-  Transaction.cpp
-C:\Users\kingj\source\repos\SoftwareEngineeringFinalProject\SoftwareEngineeringFinalProject\UniversityConferenceCenterSystem\SQLiteCpp\src\Transaction.cpp(11,10): fatal error C1083: Cannot open include file: 'Transaction.h': No such file or directory
-  UCCS-TestSystem.cpp
-C:\Users\kingj\source\repos\SoftwareEngineeringFinalProject\SoftwareEngineeringFinalProject\UCCS-TestSystem\UCCS-TestSystem.cpp(6,10): fatal error C1083: Cannot open include file: 'ConferenceCenterSystem.h': No such file or directory
-  Generating Code...
+﻿  UCCS-TestSystem.cpp
+  UCCS-TestSystem.vcxproj -> C:\Users\Steven Dnako\Documents\GitHub\SoftwareEngineeringFinalProject\x64\Debug\UCCS-TestSystem.exe
