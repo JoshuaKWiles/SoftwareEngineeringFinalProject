@@ -8,7 +8,6 @@ class ScheduleEvent {
 public:
 	ScheduleEvent(const std::string& id, const std::string& name_) : scheduleID(id), name(name_) {}
 
-	virtual long double getCost() const = 0;
 	virtual std::string getSchedule() const = 0;
 	virtual std::vector<Presenter*> getPresenter() const = 0;
 
@@ -41,13 +40,6 @@ public:
 	const std::string startTime;
 	const std::string endTime;
 	Location* const location;
-
-	long double getCost() const {
-		long double total = location->getCost();
-		if(!equipmentList.empty())
-			for (auto resource : equipmentList) total += resource->getCost();
-		return total;
-	}
 
 	std::string getSchedule() const { return '(' + startTime + " - " + endTime + ')'; }
 	std::vector<Presenter*> getPresenter() const {
@@ -85,16 +77,21 @@ private:
 	std::vector<Equipment*> equipmentList;
 };
 
-class Event : ScheduleEvent {
+class Event : public ScheduleEvent {
 public:
-	Event(const std::string& name_, const std::string& date) : ScheduleEvent(ConferenceManager::getInstance()->eventManager->newEvent(name_, date), name_), date(date) {}
+	Event(const std::string& name_, const std::string& date_, const long double& charge_) : ScheduleEvent(ConferenceManager::getInstance()->eventManager->newEvent(name_, date_, charge_), name_), date(date_), charge(charge_) {}
 	~Event() {
 		for (int i = 0; i < 4; i++)
 			if (sessions[i] != nullptr) delete sessions[i];
 	}
 
 	long double getCost() const { return 0.0l; }
-	std::string getSchedule() const { return date; }
+	std::string getSchedule() const { 
+		std::string schedule = date + '\n';
+		for (int i = 0; i < 4; i++)
+			if (sessions[i] != nullptr) schedule += sessions[i]->name + ": " + sessions[i]->getSchedule() + '\n';
+		return schedule;
+	}
 	std::vector<Presenter*> getPresenter() const {
 		std::vector<Presenter*> ret;
 		return ret;
@@ -110,6 +107,7 @@ public:
 		return sessions[sessionNo - 1];
 	}
 	const std::string date;
+	const long double charge;
 private:
 	Session* sessions[5] = { nullptr, nullptr, nullptr, nullptr, nullptr };
 };
