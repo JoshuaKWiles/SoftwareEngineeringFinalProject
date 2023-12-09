@@ -8,6 +8,166 @@
       d:DesignHeight="400" d:DesignWidth="400"
       Title="MaintenanceReportxaml">
 
+    <Page.Resources>
+        <Style x:Key="ComboBoxToggleButton" TargetType="ToggleButton">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ToggleButton">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition Width="32" />
+                            </Grid.ColumnDefinitions>
+                            <Border
+                          x:Name="Border"
+                          Grid.ColumnSpan="2"
+                          CornerRadius="8"
+                          Background="{TemplateBinding Background}"
+                          BorderBrush="#F6F6F6"
+                          BorderThickness="1" 
+                        />
+
+                            <Path
+                            x:Name="Arrow"
+                            Grid.Column="1"    
+                            Fill="{TemplateBinding Foreground}"
+                            Stroke="{TemplateBinding Foreground}"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Data="M 0 0 L 4 4 L 8 0 Z"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <ControlTemplate x:Key="ComboBoxTextBox" TargetType="TextBox">
+            <Border x:Name="PART_ContentHost" Focusable="True" />
+        </ControlTemplate>
+
+        <Style x:Key="theComboBox" TargetType="{x:Type ComboBox}">
+            <Setter Property="Foreground" Value="#333" />
+            <Setter Property="BorderBrush" Value="Gray" />
+            <Setter Property="Background" Value="White" />
+            <Setter Property="SnapsToDevicePixels" Value="true"/>
+            <Setter Property="OverridesDefaultStyle" Value="true"/>
+            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
+            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+            <Setter Property="ScrollViewer.CanContentScroll" Value="true"/>
+            <Setter Property="FontSize" Value="13" />
+            <Setter Property="MinWidth" Value="150"/>
+            <Setter Property="MinHeight" Value="35"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ComboBox">
+                        <Grid>
+                            <ToggleButton
+                            Cursor="Hand"
+                            Name="ToggleButton"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            Background="{TemplateBinding Background}"
+                            Foreground="{TemplateBinding Foreground}"
+                            Style="{StaticResource ComboBoxToggleButton}"
+                            Grid.Column="2"
+                            Focusable="false"
+                            IsChecked="{Binding Path=IsDropDownOpen,Mode=TwoWay,RelativeSource={RelativeSource TemplatedParent}}"
+                            ClickMode="Press"/>
+
+                            <ContentPresenter
+                            Name="ContentSite"
+                            IsHitTestVisible="False"
+                            Content="{TemplateBinding SelectionBoxItem}"
+                            ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
+                            ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"
+                            Margin="10,3,30,3"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Left" />
+                            <TextBox x:Name="PART_EditableTextBox"
+                            Style="{x:Null}"
+                            Template="{StaticResource ComboBoxTextBox}"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Margin="3,3,23,3"
+                            Focusable="True"                               
+                            Visibility="Hidden"
+                            IsReadOnly="{TemplateBinding IsReadOnly}"/>
+                            <Popup
+                            Name="Popup"
+                            Placement="Bottom"
+                            IsOpen="{TemplateBinding IsDropDownOpen}"
+                            AllowsTransparency="True"
+                            Focusable="False"
+                            PopupAnimation="Slide">
+                                <Grid
+                              Name="DropDown"
+                              SnapsToDevicePixels="True"               
+                              MinWidth="{TemplateBinding ActualWidth}"
+                              MaxHeight="{TemplateBinding MaxDropDownHeight}">
+                                    <Border
+                                    CornerRadius="8"
+                                    x:Name="DropDownBorder"
+                                    Background="White"
+                                    BorderThickness="1"
+                                    BorderBrush="#F6F6F6"
+                                    />
+                                    <ScrollViewer Margin="4,6,4,6" SnapsToDevicePixels="True">
+                                        <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Contained" />
+                                    </ScrollViewer>
+                                </Grid>
+                            </Popup>
+
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="HasItems" Value="false">
+                                <Setter TargetName="DropDownBorder" Property="MinHeight" Value="95"/>
+                            </Trigger>
+                            <Trigger Property="IsGrouping" Value="true">
+                                <Setter Property="ScrollViewer.CanContentScroll" Value="false"/>
+                            </Trigger>
+                            <Trigger Property="IsEditable" Value="true">
+                                <Setter Property="IsTabStop" Value="false"/>
+                                <Setter TargetName="PART_EditableTextBox" Property="Visibility" Value="Visible"/>
+                                <Setter TargetName="ContentSite" Property="Visibility" Value="Hidden"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="theComboBoxItem" TargetType="{x:Type ComboBoxItem}">
+            <Setter Property="SnapsToDevicePixels" Value="true" />
+            <Setter Property="HorizontalAlignment" Value="Stretch" />
+            <Setter Property="VerticalAlignment" Value="Stretch" />
+            <Setter Property="FontSize" Value="13" />
+            <Setter Property="OverridesDefaultStyle" Value="true"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ComboBoxItem">
+                        <Border
+                        Name="Border"
+                        Padding="5"
+                        Margin="2"
+                        BorderThickness="2,0,0,0"
+                        CornerRadius="0"
+                        Background="Transparent"
+                        BorderBrush="Transparent">
+                            <TextBlock TextAlignment="Left">
+                            <ContentPresenter />
+                            </TextBlock>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsHighlighted" Value="true">
+                                <Setter TargetName="Border" Property="BorderBrush" Value="#B3CB37"/>
+                                <Setter TargetName="Border" Property="Background" Value="#F8FAEB"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
+
     <Grid Background="#B9B9B9">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -29,6 +189,105 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        
+        <TextBlock Grid.Row="0" Grid.Column="0" Margin="5,5,5,5" 
+        Grid.ColumnSpan="8" Text="Report Required Maintenance"
+        FontSize="27" HorizontalAlignment="Center"/>
+
+        <StackPanel x:Name="MaintenanceOptionStack" Orientation="Horizontal" 
+        Grid.Row="1" Grid.ColumnSpan="8">
+            <StackPanel Orientation="Horizontal" Margin="40 0 0 0">
+                <RadioButton IsChecked="True" RenderTransformOrigin="0.5,0.5" 
+                 Height="14" GroupName="MaintenanceOptions" Content="Equipment" 
+                 Checked="MaintenanceOptions_Checked" Name="equipmentRadio">
+                    <RadioButton.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform ScaleX="1.85" ScaleY="1.85"/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </RadioButton.RenderTransform>
+                </RadioButton>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="70 0 0 0">
+                <RadioButton IsChecked="False" RenderTransformOrigin="0.5,0.5" 
+                 Height="14" GroupName="MaintenanceOptions" Content="Room" 
+                 Checked="MaintenanceOptions_Checked" Name="roomRadio">
+                    <RadioButton.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform ScaleX="1.85" ScaleY="1.85"/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </RadioButton.RenderTransform>
+                </RadioButton>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="60 0 0 0">
+                <RadioButton IsChecked="False" RenderTransformOrigin="0.5,0.5" 
+                 Height="14" GroupName="MaintenanceOptions" Content="Facilities" 
+                 Checked="MaintenanceOptions_Checked" Name="facilitiesRadio">
+                    <RadioButton.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform ScaleX="1.85" ScaleY="1.85"/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </RadioButton.RenderTransform>
+                </RadioButton>
+            </StackPanel>
+        </StackPanel>
+
+        <ComboBox Grid.Row="2" Grid.ColumnSpan="6" 
+                  Margin="10,10,10,0" 
+                  Grid.Column="1" Style="{DynamicResource theComboBox}"
+                  ItemContainerStyle="{DynamicResource theComboBoxItem}"
+                  Name="equipmentCombo" Visibility="Visible"
+                  GotFocus="equipmentCombo_GotFocus"
+                  LostFocus="equipmentCombo_LostFocus">
+            <ComboBoxItem Content="Select Damaged Item" Tag="null" IsSelected="True"/>
+            <ComboBoxItem Content="White Board" Tag="whiteboard"/>
+            <ComboBoxItem Content="Projector" Tag="projector"/>
+            <ComboBoxItem Content="Speaker" Tag="speaker"/>
+            <ComboBoxItem Content="Microphone" Tag="microphone"/>
+        </ComboBox>
+
+        <ComboBox Grid.Row="2" Grid.ColumnSpan="6" 
+                  Margin="10,30,10,30" Grid.RowSpan="2" 
+                  Grid.Column="1" Style="{DynamicResource theComboBox}"
+                  ItemContainerStyle="{DynamicResource theComboBoxItem}"
+                  Name="roomCombo" Visibility="Hidden"
+                  GotFocus="roomCombo_GotFocus"
+                  LostFocus="roomCombo_LostFocus">
+            <ComboBoxItem Content="Select Room" Tag="null" IsSelected="True"/>
+            <ComboBoxItem Content="Roosevelt" Tag="roosevelt"/>
+            <ComboBoxItem Content="Lincoln" Tag="lincoln"/>
+            <ComboBoxItem Content="Washington" Tag="washington"/>
+        </ComboBox>
+
+        <TextBox Name="userInputBox" 
+                 Grid.Row="3" 
+                 Grid.ColumnSpan="8" 
+                 Margin="22,10,22,15" 
+                 Grid.RowSpan="4"
+                 GotFocus="userInputBox_GotFocus"
+                 LostFocus="userInputBox_LostFocus"
+                 TextWrapping="Wrap"
+                 FontSize="14"
+                 Foreground="Gray"
+                 TextChanged="userInputBox_TextChanged">
+            Describe Grievance...
+        </TextBox>
+
+        <Button Name="submitReport"
+                Grid.Column="2" 
+                Grid.Row="7"
+                Grid.ColumnSpan="4" 
+                Margin="0,0,0,15"
+                Content="Submit Report"
+                FontSize="16"
+                IsEnabled="False"
+                Click="submitReport_Click"/>
     </Grid>
 </Page>
