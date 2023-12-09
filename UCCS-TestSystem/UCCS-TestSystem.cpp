@@ -10,13 +10,12 @@ int main()
 	ConferenceManager& manager = *ConferenceManager::getInstance();
 	manager.init();
 
-	Session test("Test Session", Location::Washington, "11:00 AM", "3:00 PM");
-	std::cerr << test.scheduleID << std::endl;
-	std::cerr << manager.eventManager->sessionName(test.scheduleID) << "\t(" << manager.eventManager->sessionStart(test.scheduleID) << " - " << manager.eventManager->sessionEnd(test.scheduleID) << ')' << std::endl;
+	Event test1("Software Engineering", " Jan 2, 2011");
+	test1.newSession(1, "C++", Location::Roosevelt, "10:00 AM", "3:00 PM");
+	test1.newSession(2, "Python", Location::Washington, "10:00", "3:00 PM");
 
-	Location* tmp = manager.eventManager->sessionLocation(test.scheduleID);
-
-	std::cerr << tmp << '\n' << tmp->getName() << std::endl;
+	Event test2("Game Con", "Feb 5, 2011");
+	test2.newSession(1, "DnD", Location::Roosevelt, "3:00 PM", "5:00 PM");
 
 	return EXIT_SUCCESS;
 }

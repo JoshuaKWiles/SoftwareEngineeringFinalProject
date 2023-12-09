@@ -19,36 +19,37 @@ public:
 		stmt = "SELECT resourceID FROM resources WHERE type ='" + stmt + "';";
 		stmt = database->execAndGet(stmt.c_str()).getString();
 
-		std::string id = stmt;
+		std::string resourceID = stmt;
 
-		stmt = "INSERT INTO sessionResources (sessionID, resourceID) VALUES ('" + sessionID + "', '" + stmt + "');";
+		stmt = "INSERT INTO sessionResources (sessionID, resourceID) VALUES ('" + sessionID + "', '" + resourceID + "');";
 		database->exec(stmt.c_str());
 
-		return new Location(id.c_str(), location);
+		return new Location(resourceID.c_str(), location);
 	}
-	Location::RoomType room(const std::string& id) {
-		std::string stmt = "SELECT type FROM resources WHERE resourceID='" + id + "';";
+	Equipment* regesterEquipment(const std::string& sessionID, const Equipment::EquipmentType& resource) { 
+		return nullptr;
+	}
+	const std::string addEquipment(const Equipment::EquipmentType& resource) {
+		std::string stmt = typeName(resource), resourceID = uuidGenerator->getUUID().str();
+		stmt = "INSERT INTO resources(resourceID, type) VALUES ('" + resourceID + "', '" + stmt + "')";
+		database->exec(stmt.c_str());
+		return resourceID;
+	}
+	Location::RoomType room(const std::string& resourceID) {
+		std::string stmt = "SELECT type FROM resources WHERE resourceID='" + resourceID + "';";
 		return typeLocation(database->execAndGet(stmt.c_str()).getText());
 	}
 	std::string roomID(const Location::RoomType& room) {
 		std::string stmt = "SELECT resourceID FROM resources WHERE type='" + typeName(room) + "';";
 		return database->execAndGet(stmt.c_str()).getText();
 	}
-
-	const std::string addEquipment(const Equipment::EquipmentType& resource) {
-		std::string stmt = typeName(resource), id = uuidGenerator->getUUID().str();
-		stmt = "INSERT INTO resources(resourceID, type) VALUES ('" + id + "', '" + stmt + "')";
-		database->exec(stmt.c_str());
-		return id;
-	}
-	Equipment::EquipmentType type(const std::string& id) {
-		std::string stmt = "SELECT type FROM resources WHERE resourceID='" + id + "';";
+	Equipment::EquipmentType type(const std::string& resourceID) {
+		std::string stmt = "SELECT type FROM resources WHERE resourceID='" + resourceID + "';";
 		return typeEquipment(database->execAndGet(stmt.c_str()).getText());
 	}
-	Equipment* instance(const std::string& id) {
-		return new Equipment(id, type(id));
+	Equipment* instance(const std::string& resourceID) {
+		return new Equipment(resourceID, type(resourceID));
 	}
-	Equipment* regesterEquipment(const std::string& sessionID, const Equipment::EquipmentType& resource) { return nullptr; }
 
 	void reportResources() const {
 		SQLite::Statement stmt(*database, "SELECT * FROM RESOURCES;");
@@ -74,29 +75,45 @@ private:
 class EventManager {
 public:
 	EventManager(SQLite::Database* db, UUIDv4::UUIDGenerator<std::mt19937_64>* generator) : database(db), uuidGenerator(generator) {}
-	std::string newSession(const std::string& name, const std::string& start, const std::string& end) {
-		std::string id = uuidGenerator->getUUID().str();
-		std::string stmt = "INSERT INTO sessions (sessionID, name, startTime, endTime, isSpecalSession) VALUES('" + id + "', '" + name + "', '" + start + "', '" + end + "', 0);";
+	std::string newSession(const std::string& eventID, const std::string& name, const std::string& start, const std::string& end) {
+		const std::string sessionID = uuidGenerator->getUUID().str();
+		std::string stmt = "INSERT INTO sessions(sessionID, name, startTime, endTime, isSpecalSession) VALUES('" + sessionID + "', '" + name + "', '" + start + "', '" + end + "', 0);";
 		database->exec(stmt.c_str());
-		return id;
+		stmt = "INSERT INTO eventSessions(eventID, sessionID) values('" + eventID + "', '" + sessionID + "');";
+		database->exec(stmt.c_str());
+		return sessionID;
 	}
-	std::string sessionName(const std::string& id) const {
-		std::string stmt = "SELECT name FROM sessions WHERE sessionID='" + id + "';";
+	std::string sessionName(const std::string& sessionID) const {
+		std::string stmt = "SELECT name FROM sessions WHERE sessionID='" + sessionID+ "';";
 		return database->execAndGet(stmt.c_str()).getString();
 	}
-	std::string sessionStart(const std::string& id) const {
-		std::string stmt = "SELECT startTime FROM sessions WHERE sessionID='" + id + "';";
+	std::string sessionStart(const std::string& sessionID) const {
+		std::string stmt = "SELECT startTime FROM sessions WHERE sessionID='" + sessionID + "';";
 		return database->execAndGet(stmt.c_str()).getString();
 	}
-	std::string sessionEnd(const std::string& id) const {
-		std::string stmt = "SELECT endTime FROM sessions WHERE sessionID='" + id + "';";
+	std::string sessionEnd(const std::string& sessionID) const {
+		std::string stmt = "SELECT endTime FROM sessions WHERE sessionID='" + sessionID + "';";
 		return database->execAndGet(stmt.c_str()).getString();
 	}
-	Location* sessionLocation(const std::string& id) const {
-		std::string stmt = "SELECT resources.resourceID, resources.type FROM sessionResources JOIN resources ON sessionResources.resourceID = resources.resourceID WHERE sessionResources.sessionID='" + id + "' AND type IN ('Roosevelt', 'Lincoln', 'Washington');";
+	Location* sessionLocation(const std::string& sessionID) const {
+		std::string stmt = "SELECT resources.resourceID, resources.type FROM sessionResources JOIN resources ON sessionResources.resourceID = resources.resourceID WHERE sessionResources.sessionID='" + sessionID + "' AND type IN ('Roosevelt', 'Lincoln', 'Washington');";
 		SQLite::Statement select(*database, stmt.c_str());
 		select.executeStep();
 		return new Location(select.getColumn(0).getString(), typeLocation(select.getColumn(1).getString()));
+	}
+	std::vector<Equipment*> equipmentList(const std::string sessionID) {
+		std::string stmt = "SELECT resources.resourceID, resources.type FROM resources JOIN sessionResources WHERE sessionID='" + sessionID + "' AND type IN ('Whiteboard', 'Projector', 'Speaker', 'Microphone');";
+		SQLite::Statement select(*database, stmt.c_str());
+		std::vector<Equipment*> ret;
+		while (select.executeStep())
+			ret.push_back(new Equipment(select.getColumn(0).getText(), typeEquipment(select.getColumn(1).getText())));
+		return ret;
+	}
+	std::string newEvent(const std::string& name, const std::string& date) {
+		const std::string eventID = uuidGenerator->getUUID().str();
+		const std::string stmt = "INSERT INTO events(eventID, name, date) VALUES('" + eventID + "', '" + name + "', '" + date + "');";
+		database->exec(stmt.c_str());
+		return eventID;
 	}
 private:
 	SQLite::Database* database;
