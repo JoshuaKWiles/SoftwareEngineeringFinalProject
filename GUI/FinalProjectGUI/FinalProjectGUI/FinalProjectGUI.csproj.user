@@ -13,7 +13,13 @@
     <Compile Update="EventInfo.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="GuestInterface.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="MaintenanceReportxaml.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="PresenterInterface.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Schedule.xaml.cs">
@@ -27,10 +33,16 @@
     <Page Update="EventInfo.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="GuestInterface.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="MaintenanceReportxaml.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="MainWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="PresenterInterface.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Schedule.xaml">
