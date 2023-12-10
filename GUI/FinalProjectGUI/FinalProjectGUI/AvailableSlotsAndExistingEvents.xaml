@@ -1,0 +1,90 @@
+﻿<Page x:Class="FinalProjectGUI.AvailableSlotsAndExistingEvents"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:FinalProjectGUI"
+      mc:Ignorable="d" 
+      d:DesignHeight="400" d:DesignWidth="400"
+      Title="AvailableSlotsAndExistingEvents">
+
+    <Grid Background="#B9B9B9">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <ScrollViewer Grid.RowSpan="8" Grid.ColumnSpan="8">
+            <StackPanel Orientation="Vertical" Name="allEvents">
+                <Border BorderThickness="2" 
+                        BorderBrush="Gray"
+                        Height="114"
+                        Background="#c8c8c8">
+                    <StackPanel Name="event0" Height="110">
+                        <TextBox Name="event0Name"
+                                 FontSize="20"
+                                 Text="How To Become a Millionare"
+                                 Padding="5 0 0 0"
+                                 BorderBrush="Gray"
+                                 BorderThickness="2"
+                                 MaxLength="35"
+                                 IsReadOnly="True"
+                                 />
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Room: " FontSize="14" FontWeight="Bold"/>
+                            <ComboBox Name="event0rooms" 
+                                      Width="320"
+                                      IsEnabled="False"
+                                      IsReadOnly="True">
+                                <ComboBoxItem Content="Roosevelt"/>
+                                <ComboBoxItem Content="Lincoln" IsSelected="True"/>
+                                <ComboBoxItem Content="Washington"/>
+                            </ComboBox>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Time:  " 
+                                       FontSize="14"
+                                       FontWeight="Bold"/>
+                            <ComboBox Name="event0times" 
+                                      Width="320"
+                                      IsEnabled="False"
+                                      IsReadOnly="True">
+                                <ComboBoxItem Content="8:00 AM - 10:00 AM"/> 
+                                <ComboBoxItem Content="10:30 AM - 12:30 PM"/> 
+                                <ComboBoxItem Content="1:00 PM - 3:00 PM" IsSelected="True"/> 
+                                <ComboBoxItem Content="3:30 PM - 5:30 PM"/> 
+                                <ComboBoxItem Content="6:00 PM - 8:00 PM"/> 
+                            </ComboBox>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Height="30">
+                            <Button Content="Check In" 
+                                    Width="80"
+                                    Margin="10 1 10 1"/>
+                            <Button Content="Claim Timeslot" 
+                                    Width="120"
+                                    Margin="10 1 10 1"/>
+                            <Button Content="Edit Event" 
+                                    Width="120"
+                                    Margin="10 1 10 1"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>

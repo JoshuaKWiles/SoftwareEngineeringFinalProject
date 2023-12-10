@@ -39,16 +39,16 @@ namespace FinalProjectGUI
             //View Schedule -> Close Schedule
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void ViewScheduleButton_Click(object sender, RoutedEventArgs e)
         {
-
+            scheduleCalendar.Visibility = Visibility.Visible;
         }
 
         private void LoadEvent_Click(object sender, RoutedEventArgs e)
         {
             if (Convert.ToString(EventOpenClose.Content) == "Load Event")
             {
-                eventInterface.Navigate(new EventInfo(userType));
+                eventInterface.Navigate(new EventInfo(userType, "edit"));
                 EventOpenClose.Content = "Close Event";
             }
             else if(Convert.ToString(EventOpenClose.Content) == "Close Event")
