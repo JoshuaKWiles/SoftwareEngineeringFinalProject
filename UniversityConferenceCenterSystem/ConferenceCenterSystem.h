@@ -83,9 +83,42 @@ private:
 
 class GuestManager {
 public:
+	GuestManager(SQLite::Database* db, UUIDv4::UUIDGenerator<std::mt19937_64>* generator) : database(db), uuidGenerator(generator) {}
+	std::string registerGuest(const std::string& eventID, const std::string& guestName) {
+		std::string stmt;
+		return stmt;
+	}
+	std::string registerPresenter(const std::string& sessionID, const std::string& guestID) {
+		std::string stmt;
+		return stmt;
+	}
+	bool registerGuestSpecialSession(const std::string& sessionID, const std::string& guestID) {
 
+		return true;
+	}
+	std::string guestName(const std::string& guestID) {
+		std::string stmt;
+		return stmt;
+	}
+	std::string presenterID(const std::string& guestID) {
+		std::string stmt;
+		return stmt;
+	}
+	std::vector<std::string> guestList(const std::string& eventID) {
+		std::vector<std::string> guests;
+		return guests;
+	}
+	std::vector<std::string> specialSessionGuestList(const std::string& sessionID) {
+		std::vector<std::string> guests;
+		return guests;
+	}
+	std::vector<std::string> presenterList(const std::string& sessionID) {
+		std::vector<std::string> presenters;
+		return presenters;
+	}
 private:
-
+	SQLite::Database* database;
+	UUIDv4::UUIDGenerator<std::mt19937_64>* uuidGenerator;
 };
 
 class EventManager {
@@ -177,11 +210,13 @@ private:
 
 	ConferenceManager() : db(SQLite::Database("ConferenceCenter.db", SQLite::OPEN_READWRITE | SQLite::OPEN_CREATE, 1, NULL)),
 						  resourceManager(new ResourceManager(&db, &uuidGenerator)),
-						  eventManager(new EventManager(&db, &uuidGenerator))
+						  eventManager(new EventManager(&db, &uuidGenerator)),
+						  guestManager(new GuestManager(&db, &uuidGenerator))
 							{ std::atexit(&Destructor); }
 	~ConferenceManager() {
 		delete resourceManager;
 		delete eventManager;
+		delete guestManager;
 	}
 
 	static void Destructor() {
@@ -195,6 +230,7 @@ private:
 public:
 	ResourceManager* const resourceManager;
 	EventManager* const eventManager;
+	GuestManager* const guestManager;
 	
 
 	static ConferenceManager* getInstance() {
