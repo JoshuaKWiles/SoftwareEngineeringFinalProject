@@ -26,10 +26,24 @@ public:
 
 		return new Location(resourceID.c_str(), location);
 	}
-	Equipment* regesterEquipment(const std::string& sessionID, const Equipment::EquipmentType& resource) { 
-		return nullptr;
+	Equipment* regesterEquipment(const std::string& sessionID, const Equipment::EquipmentType resource) { 
+		std::string date = database->execAndGet("SELECT events.date FROM events JOIN eventSessions ON events.eventID = eventSessions.eventID WHERE eventSessions.sessionID = '" + sessionID + "';");
+		std::string stmt = "SELECT resourceID, type FROM resources													\
+							WHERE resourceID NOT IN(																\
+								SELECT resources.resourceID FROM resources											\
+								LEFT JOIN sessionResources ON resources.resourceID = sessionResources.resourceID	\
+								LEFT JOIN sessions ON sessionResources.sessionID = sessions.sessionID				\
+								LEFT JOIN eventSessions ON eventSessions.sessionID = sessions.sessionID				\
+								LEFT JOIN events ON events.eventID = eventSessions.eventID							\
+								WHERE events.date = '" + date + "'													\
+							) AND type = '" + typeName(resource) + "';";
+		SQLite::Statement select(*database, stmt.c_str());
+		select.executeStep();
+		stmt = "INSERT INTO sessionResources(sessionID, resourceID) VALUES('" + sessionID + "', '" + select.getColumn(0).getString() + "');";
+		database->exec(stmt.c_str());
+		return new Equipment(select.getColumn(0).getString(), resource);
 	}
-	const std::string addEquipment(const Equipment::EquipmentType& resource) {
+	const std::string addEquipment(const Equipment::EquipmentType resource) {
 		std::string stmt = typeName(resource), resourceID = uuidGenerator->getUUID().str();
 		stmt = "INSERT INTO resources(resourceID, type) VALUES ('" + resourceID + "', '" + stmt + "')";
 		database->exec(stmt.c_str());
@@ -39,7 +53,7 @@ public:
 		std::string stmt = "SELECT type FROM resources WHERE resourceID='" + resourceID + "';";
 		return typeLocation(database->execAndGet(stmt.c_str()).getText());
 	}
-	std::string roomID(const Location::RoomType& room) {
+	std::string roomID(const Location::RoomType room) {
 		std::string stmt = "SELECT resourceID FROM resources WHERE type='" + typeName(room) + "';";
 		return database->execAndGet(stmt.c_str()).getText();
 	}
@@ -126,6 +140,14 @@ public:
 	long double getCharge(const std::string& eventID) {
 		std::string stmt = "SELECT charge FROM events WHERE eventID='" + eventID + "';";
 		return database->execAndGet(stmt.c_str()).getDouble();
+	}
+	std::vector<std::string> getSessions(const std::string& eventID) {
+		std::string stmt = "SELECT sessionID FROM eventSessions WHERE eventID='" + eventID + "';";
+		SQLite::Statement select(*database, stmt.c_str());
+		std::vector<std::string> sessions;
+		while (select.executeStep())
+			sessions.push_back(select.getColumn(0).getString());
+		return sessions;
 	}
 private:
 	SQLite::Database* database;

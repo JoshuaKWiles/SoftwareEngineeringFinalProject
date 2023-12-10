@@ -17,11 +17,11 @@ public:
 
 class Session : public ScheduleEvent {
 public:
-	Session(const std::string& eventID, const std::string& name_, const Location::RoomType room, const std::string& start, const std::string& end) : 
-					ScheduleEvent(ConferenceManager::getInstance()->eventManager->newSession(eventID, name_,start, end), name_), 
-					location(ConferenceManager::getInstance()->resourceManager->regesterLocation(scheduleID, room)), 
-					startTime(start), 
-					endTime(end) 
+	Session(const std::string& eventID, const std::string& name_, const Location::RoomType room, const std::string& start, const std::string& end) :
+					ScheduleEvent(ConferenceManager::getInstance()->eventManager->newSession(eventID, name_,start, end), name_),
+					location(ConferenceManager::getInstance()->resourceManager->regesterLocation(scheduleID, room)),
+					startTime(start),
+					endTime(end)
 					{ }
 
 	Session(const std::string& sessionID) :
@@ -79,7 +79,20 @@ private:
 
 class Event : public ScheduleEvent {
 public:
-	Event(const std::string& name_, const std::string& date_, const long double& charge_) : ScheduleEvent(ConferenceManager::getInstance()->eventManager->newEvent(name_, date_, charge_), name_), date(date_), charge(charge_) {}
+	Event(const std::string& name_, const std::string& date_, const long double& charge_) :
+					ScheduleEvent(ConferenceManager::getInstance()->eventManager->newEvent(name_, date_, charge_), name_),
+					date(date_),
+					charge(charge_)
+					{ }
+	Event(const std::string& eventID) :
+					ScheduleEvent(eventID, ConferenceManager::getInstance()->eventManager->eventName(eventID)),
+					date(ConferenceManager::getInstance()->eventManager->eventDate(eventID)),
+					charge(ConferenceManager::getInstance()->eventManager->getCharge(eventID))
+					{
+						std::vector<std::string> sessionList = ConferenceManager::getInstance()->eventManager->getSessions(eventID);
+						for (int i = 0; i < (6 < sessionList.size() ? 6 : sessionList.size()); i++)
+							sessions[i] = new Session(sessionList.at(i));
+					}
 	~Event() {
 		for (int i = 0; i < 4; i++)
 			if (sessions[i] != nullptr) delete sessions[i];
@@ -109,5 +122,5 @@ public:
 	const std::string date;
 	const long double charge;
 private:
-	Session* sessions[5] = { nullptr, nullptr, nullptr, nullptr, nullptr };
+	Session* sessions[6] = { nullptr, nullptr, nullptr, nullptr, nullptr, nullptr };
 };
