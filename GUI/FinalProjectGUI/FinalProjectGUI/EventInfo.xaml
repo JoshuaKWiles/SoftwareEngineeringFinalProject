@@ -29,7 +29,7 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        
+
         <TextBlock Grid.Row="0" Grid.Column="0" 
                    Grid.ColumnSpan="2" FontSize="16" 
                    VerticalAlignment="Center" HorizontalAlignment="Left"
@@ -71,7 +71,7 @@
                  Margin="6" TextAlignment="Left" Padding="3 4 5 0" 
                  FontSize="20" Text="$1,200"
                  Name="x_EventPrice"/>
-        
+
         <!--#region Equipment Grid-->
         <Grid Grid.Column="4" Grid.Row="3"
                     Grid.ColumnSpan="4">
@@ -160,16 +160,45 @@
                  FontSize="16" Text="Roosevelt"
                  Name="x_EventLocation"/>
 
-        <TextBlock Grid.Row="7" Grid.Column="0" 
+        <TextBlock Grid.Row="5" Grid.Column="0" 
                    Grid.ColumnSpan="3" FontSize="16" 
                    VerticalAlignment="Center" HorizontalAlignment="Left"
                    Margin="5 0 0 0" Text="Extra Info:"/>
-        <TextBox Grid.Row="7" Grid.Column="2" Grid.ColumnSpan="6"
-                 Margin="6" TextAlignment="Left" TextWrapping="Wrap"
-                 FontSize="16" Text="Special Event (200 Guests)
+        <TextBox Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="6"
+                 Margin="6,6,6,25" TextAlignment="Left" TextWrapping="Wrap"
+                 FontSize="16" Grid.RowSpan="2"
+                 Text="Special Event (200 Guests)
                                      Other filler info idk"
                  Name="x_EventAdditionalInfo"/>
-
+        <Button Name="checkIn" 
+                Grid.Row="6"
+                Grid.ColumnSpan="4"
+                Margin="25,43,25,12"
+                FontSize="18"
+                Content="Check In"
+                Visibility="Hidden" 
+                Grid.Column="2"
+                Grid.RowSpan="2"/>
+        <Button Name="deleteEvent" 
+                Grid.Column="0" 
+                Grid.Row="6"
+                Grid.ColumnSpan="4"
+                Margin="25,43,25,12"
+                FontSize="18"
+                Content="Delete Event" 
+                Grid.RowSpan="2"
+                Background="#cc8787"
+                Visibility="Hidden"/>
+        <Button Name="saveEvent" 
+                Grid.Column="4" 
+                Grid.Row="6"
+                Grid.ColumnSpan="4"
+                Margin="25,43,25,12"
+                FontSize="18"
+                Content="Save Changes" 
+                Grid.RowSpan="2"
+                Background="#87cc87"
+                Visibility="Hidden"/>
     </Grid>
-    
+
 </Page>

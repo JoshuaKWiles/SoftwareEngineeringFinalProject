@@ -21,6 +21,7 @@ namespace FinalProjectGUI
     public partial class EmployeeInterface : Page
     {
         private List<Event> allEvents = new List<Event>();
+        private string userType = "employee";
         public EmployeeInterface()
         {
             InitializeComponent();
@@ -30,6 +31,12 @@ namespace FinalProjectGUI
         {
             //TODO
             //Define allEvents list
+        }
+        
+        private void restoreDefaultButtonLabels()
+        {
+            //Load Event -> Close Event
+            //View Schedule -> Close Schedule
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -41,7 +48,7 @@ namespace FinalProjectGUI
         {
             if (Convert.ToString(EventOpenClose.Content) == "Load Event")
             {
-                eventInterface.Navigate(new EventInfo());
+                eventInterface.Navigate(new EventInfo(userType));
                 EventOpenClose.Content = "Close Event";
             }
             else if(Convert.ToString(EventOpenClose.Content) == "Close Event")

@@ -8,7 +8,7 @@
         Title="Software_Engineering_GUI_Container" Height="420" Width="820">
     <Grid Background="Gray">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width=".3*"/>
             <ColumnDefinition Width="10*"/>
             <ColumnDefinition Width="10*"/>
             <ColumnDefinition Width="10*"/>
@@ -17,18 +17,18 @@
             <ColumnDefinition Width="10*"/>
             <ColumnDefinition Width="10*"/>
             <ColumnDefinition Width="10*"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width=".3*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height=".3*"/>
             <RowDefinition Height="10*"/>
             <RowDefinition Height="10*"/>
             <RowDefinition Height="10*"/>
             <RowDefinition Height="10*"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height=".3*"/>
         </Grid.RowDefinitions>
         <Frame Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="8" Grid.RowSpan="4"
-               Background="LightGray" Name="main_frame">
+               Background="LightGray" Name="main_frame" NavigationUIVisibility="Hidden">
             
         </Frame>
     </Grid>

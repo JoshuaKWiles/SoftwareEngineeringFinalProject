@@ -36,6 +36,6 @@
                 Margin="15" FontSize="20" Background="#BFBFBF"
                 Name="EventOpenClose" Content="Load Event" Click="LoadEvent_Click"/>
         <Frame Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="4" 
-               Grid.RowSpan="4" Name="eventInterface"/>
+               Grid.RowSpan="4" Name="eventInterface" NavigationUIVisibility="Hidden"/>
     </Grid>
 </Page>

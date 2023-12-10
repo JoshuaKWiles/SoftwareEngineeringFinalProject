@@ -53,3 +53,9 @@ C:\Users\kingj\source\repos\SoftwareEngineeringFinalProject\SoftwareEngineeringF
 C:\Users\kingj\source\repos\SoftwareEngineeringFinalProject\SoftwareEngineeringFinalProject\GUI\FinalProjectGUI\FinalProjectGUI\obj\Debug\net6.0-windows\EventInfo.baml
 C:\Users\Steven Dnako\Documents\GitHub\SoftwareEngineeringFinalProject\GUI\FinalProjectGUI\FinalProjectGUI\obj\Debug\net6.0-windows\EventInfo.g.cs
 C:\Users\Steven Dnako\Documents\GitHub\SoftwareEngineeringFinalProject\GUI\FinalProjectGUI\FinalProjectGUI\obj\Debug\net6.0-windows\EventInfo.baml
+C:\Users\kingj\source\repos\SoftwareEngineeringFinalProject\SoftwareEngineeringFinalProject\GUI\FinalProjectGUI\FinalProjectGUI\obj\Debug\net6.0-windows\GuestInterface.g.cs
+C:\Users\kingj\source\repos\SoftwareEngineeringFinalProject\SoftwareEngineeringFinalProject\GUI\FinalProjectGUI\FinalProjectGUI\obj\Debug\net6.0-windows\MaintenanceReportxaml.g.cs
+C:\Users\kingj\source\repos\SoftwareEngineeringFinalProject\SoftwareEngineeringFinalProject\GUI\FinalProjectGUI\FinalProjectGUI\obj\Debug\net6.0-windows\PresenterInterface.g.cs
+C:\Users\kingj\source\repos\SoftwareEngineeringFinalProject\SoftwareEngineeringFinalProject\GUI\FinalProjectGUI\FinalProjectGUI\obj\Debug\net6.0-windows\MaintenanceReportxaml.baml
+C:\Users\kingj\source\repos\SoftwareEngineeringFinalProject\SoftwareEngineeringFinalProject\GUI\FinalProjectGUI\FinalProjectGUI\obj\Debug\net6.0-windows\GuestInterface.baml
+C:\Users\kingj\source\repos\SoftwareEngineeringFinalProject\SoftwareEngineeringFinalProject\GUI\FinalProjectGUI\FinalProjectGUI\obj\Debug\net6.0-windows\PresenterInterface.baml

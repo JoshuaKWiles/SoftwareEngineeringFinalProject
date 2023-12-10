@@ -21,9 +21,38 @@ namespace FinalProjectGUI
     public partial class EventInfo : Page
     {
         public bool editing = false;
-        public EventInfo()
+        public EventInfo(string userType, string viewOrEdit)
         {
             InitializeComponent();
+
+            restoreDefaultVisibilities();
+
+            if (userType == "employee")
+            {
+                deleteEvent.Visibility = Visibility.Visible;
+                saveEvent.Visibility = Visibility.Visible;
+
+
+            }
+            else if (userType == "presenter" && viewOrEdit == "view")
+            {
+                checkIn.Visibility = Visibility.Visible;
+            }
+            else if (userType == "guest")
+            {
+                checkIn.Visibility = Visibility.Visible;
+                x_EventPrice.Visibility = Visibility.Hidden;
+                x_EventAdditionalInfo.Visibility = Visibility.Hidden;
+            }
+        }
+
+        void restoreDefaultVisibilities()
+        {
+            deleteEvent.Visibility = Visibility.Hidden;
+            checkIn.Visibility = Visibility.Hidden;
+            saveEvent.Visibility = Visibility.Hidden;
+            x_EventPrice.Visibility = Visibility.Hidden;
+            x_EventAdditionalInfo.Visibility = Visibility.Hidden;
         }
 
         bool changeColor(Rectangle rect)
