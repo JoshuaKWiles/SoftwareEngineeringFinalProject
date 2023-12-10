@@ -43,12 +43,14 @@ public:
 		database->exec(stmt.c_str());
 		return new Equipment(select.getColumn(0).getString(), resource);
 	}
+
 	const std::string addEquipment(const Equipment::EquipmentType resource) {
 		std::string stmt = typeName(resource), resourceID = uuidGenerator->getUUID().str();
 		stmt = "INSERT INTO resources(resourceID, type) VALUES ('" + resourceID + "', '" + stmt + "')";
 		database->exec(stmt.c_str());
 		return resourceID;
 	}
+
 	Location::RoomType room(const std::string& resourceID) {
 		std::string stmt = "SELECT type FROM resources WHERE resourceID='" + resourceID + "';";
 		return typeLocation(database->execAndGet(stmt.c_str()).getText());
@@ -89,14 +91,16 @@ private:
 class EventManager {
 public:
 	EventManager(SQLite::Database* db, UUIDv4::UUIDGenerator<std::mt19937_64>* generator) : database(db), uuidGenerator(generator) {}
+
 	std::string newSession(const std::string& eventID, const std::string& name, const std::string& start, const std::string& end) {
 		const std::string sessionID = uuidGenerator->getUUID().str();
-		std::string stmt = "INSERT INTO sessions(sessionID, name, startTime, endTime, isSpecalSession) VALUES('" + sessionID + "', '" + name + "', '" + start + "', '" + end + "', 0);";
+		std::string stmt = "INSERT INTO sessions(sessionID, name, startTime, endTime) VALUES('" + sessionID + "', '" + name + "', '" + start + "', '" + end + "');";
 		database->exec(stmt.c_str());
 		stmt = "INSERT INTO eventSessions(eventID, sessionID) values('" + eventID + "', '" + sessionID + "');";
 		database->exec(stmt.c_str());
 		return sessionID;
 	}
+
 	std::string sessionName(const std::string& sessionID) const {
 		std::string stmt = "SELECT name FROM sessions WHERE sessionID='" + sessionID+ "';";
 		return database->execAndGet(stmt.c_str()).getString();
@@ -123,6 +127,16 @@ public:
 			ret.push_back(new Equipment(select.getColumn(0).getString(), typeEquipment(select.getColumn(1).getString())));
 		return ret;
 	}
+	bool registerSpecialSession(const std::string sessionID, const double charge) {
+		std::string stmt = "INSERT INTO specialSessions(sessionID, charge) VALUES('" + sessionID + "', '" + std::to_string(charge) + "');";
+		database->exec(stmt.c_str());
+		return true;
+	}
+	long double getSpeicalSessionCharge(const std::string& sessionID) {
+		std::string stmt = "SELECT charge FROM specialSessions WHERE sessionID='" + sessionID + "';";
+		return database->execAndGet(stmt.c_str()).getDouble();
+	}
+
 	std::string newEvent(const std::string& name, const std::string& date, const double charge) {
 		const std::string eventID = uuidGenerator->getUUID().str();
 		const std::string stmt = "INSERT INTO events(eventID, name, date, charge) VALUES('" + eventID + "', '" + name + "', '" + date + "', '" + std::to_string(charge) + "');";
@@ -190,10 +204,10 @@ public:
 
 	void init() {
 		db.exec("CREATE TABLE IF NOT EXISTS events(eventID TEXT PRIMARY KEY, name TEXT NOT NULL, date TEXT NOT NULL, charge REAL NOT NULL);");
-		db.exec("CREATE TABLE IF NOT EXISTS sessions(sessionID TEXT PRIMARY KEY, name TEXT NOT NULL, startTime TEXT NOT NULL, endTime TEXT NOT NULL, isSpecalSession INTEGER NOT NULL);");
+		db.exec("CREATE TABLE IF NOT EXISTS sessions(sessionID TEXT PRIMARY KEY, name TEXT NOT NULL, startTime TEXT NOT NULL, endTime TEXT NOT NULL);");
 		db.exec("CREATE TABLE IF NOT EXISTS resources(resourceID TEXT PRIMARY KEY, type TEXT NOT NULL);");
 		db.exec("CREATE TABLE IF NOT EXISTS guests(guestID TEXT PRIMARY KEY, name TEXT NOT NULL);");
-		db.exec("CREATE TABLE IF NOT EXISTS specialSession(sessionID TEXT PRIMARY KEY, charge REAL NOT NULL);");
+		db.exec("CREATE TABLE IF NOT EXISTS specialSessions(sessionID TEXT PRIMARY KEY, charge REAL NOT NULL);");
 
 		// Relation Tables
 		db.exec("CREATE TABLE IF NOT EXISTS eventSessions(eventID TEXT NOT NULL, sessionID NOT NULL, PRIMARY KEY (eventID, sessionID));");

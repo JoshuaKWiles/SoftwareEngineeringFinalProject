@@ -77,6 +77,24 @@ private:
 	std::vector<Equipment*> equipmentList;
 };
 
+class SpecialSession : public Session {
+public:
+	SpecialSession(const std::string& eventID, const std::string& name_, const Location::RoomType room, const std::string& start, const std::string& end, const long double& charge_) :
+							Session(eventID, name_, room, start, end),
+							charge(charge_)
+							{ 
+								ConferenceManager::getInstance()->eventManager->registerSpecialSession(scheduleID, charge);
+							}
+	SpecialSession(const std::string& sessionID) :
+							Session(sessionID),
+							charge(ConferenceManager::getInstance()->eventManager->getSpeicalSessionCharge(sessionID))
+							{ }
+
+	const long double charge;
+private:
+
+};
+
 class Event : public ScheduleEvent {
 public:
 	Event(const std::string& name_, const std::string& date_, const long double& charge_) :
@@ -91,7 +109,8 @@ public:
 					{
 						std::vector<std::string> sessionList = ConferenceManager::getInstance()->eventManager->getSessions(eventID);
 						for (int i = 0; i < (6 < sessionList.size() ? 6 : sessionList.size()); i++)
-							sessions[i] = new Session(sessionList.at(i));
+							if (i < 4) sessions[i] = new Session(sessionList.at(i));
+							else if (i >= 4 && i < 6) sessions[i] = new SpecialSession(sessionList.at(i));
 					}
 	~Event() {
 		for (int i = 0; i < 4; i++)
@@ -115,8 +134,14 @@ public:
 			sessions[sessionNo - 1] = new Session(scheduleID, name_, room, start, end);
 		else throw std::domain_error("Session alrady exists. Select a diffrent session number.");
 	}
+	void newSpecialSession(const unsigned short sessionNo, const std::string& name_, const Location::RoomType room, const std::string& start, const std::string& end, const long double& extraCharge) {
+		assert(sessionNo == 5 || sessionNo == 6);
+		if (sessions[sessionNo - 1] == nullptr)
+			sessions[sessionNo - 1] = new SpecialSession(scheduleID, name_, room, start, end, extraCharge);
+		else throw std::domain_error("Session alrady exists. Select a diffrent session number.");
+	}
 	Session* session(const unsigned short sessionNo) {
-		assert(sessionNo == 1 || sessionNo == 2 || sessionNo == 3 || sessionNo == 4);
+		assert(sessionNo == 1 || sessionNo == 2 || sessionNo == 3 || sessionNo == 4 || sessionNo == 5 || sessionNo == 6);
 		return sessions[sessionNo - 1];
 	}
 	const std::string date;
