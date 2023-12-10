@@ -55,6 +55,24 @@ namespace FinalProjectGUI
             x_EventAdditionalInfo.Visibility = Visibility.Hidden;
         }
 
+        void allowOrDisableEditing(bool editingAllowed)
+        {
+            x_EventName.IsReadOnly = !editingAllowed;
+            x_EventDate.IsReadOnly = !editingAllowed; // Risky but I'll allow it
+            x_EventStatus.IsReadOnly = true; // Not editable by any, values are logically derived
+            x_EventTime.IsReadOnly = true; // Should be editable, but too much room for error and not enough time to impliment properly
+
+            //These are binary, no room for error
+            whiteboardButton.IsEnabled = editingAllowed;
+            projectorButton.IsEnabled = editingAllowed;
+            speakerButton.IsEnabled = editingAllowed;
+            microphoneButton.IsEnabled = editingAllowed;
+
+            x_EventLocation.IsEnabled = true; // Also has potential to fuck things up
+            x_EventAdditionalInfo.IsReadOnly = !editingAllowed;
+
+        }
+
         bool changeColor(Rectangle rect)
         {
             if (rect.Fill == Brushes.White)
@@ -92,5 +110,6 @@ namespace FinalProjectGUI
         {
             changeColor(MicrophoneBox);
         }
+
     }
 }

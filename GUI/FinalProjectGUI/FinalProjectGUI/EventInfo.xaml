@@ -37,7 +37,7 @@
         <TextBox Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="6"
                  Margin="6" TextAlignment="Left" Padding="3 7 5 0" 
                  FontSize="16" Text="Placeholder Event"
-                 Name="x_EventName"/>
+                 Name="x_EventName" IsReadOnly="True"/>
         <TextBlock Grid.Row="1" Grid.Column="0" 
                    Grid.ColumnSpan="2" FontSize="16" 
                    VerticalAlignment="Center" HorizontalAlignment="Left"
@@ -54,7 +54,7 @@
         <TextBox Grid.Row="1" Grid.Column="5" Grid.ColumnSpan="3"
                  Margin="6" TextAlignment="Left" Padding="3 7 5 0" 
                  FontSize="16" Text="Status"
-                 Name="x_EventStatus"/>
+                 Name="x_EventStatus" IsReadOnly="True"/>
         <TextBlock Grid.Row="2" Grid.Column="0" 
                    Grid.ColumnSpan="2" FontSize="16" 
                    VerticalAlignment="Center" HorizontalAlignment="Left"
