@@ -32,10 +32,18 @@
         
         <Button Grid.Column="6" Grid.Row="0" Grid.ColumnSpan="2"
                 Margin="15" FontSize="20" Content="View Schedule" Click="ViewScheduleButton_Click"
-                Background="#BFBFBF"/>
+                Background="#BFBFBF">
+            <Button.BitmapEffect>
+                <DropShadowBitmapEffect Color="Black" Direction="300" Softness=".3" ShadowDepth="5" Opacity="0.2"/>
+            </Button.BitmapEffect>
+        </Button>
         <Button Grid.Column="4" Grid.Row="0" Grid.ColumnSpan="2" 
                 Margin="15" FontSize="20" Background="#BFBFBF"
-                Name="EventOpenClose" Content="Load Event" Click="LoadEvent_Click"/>
+                Name="EventOpenClose" Content="Load Event" Click="LoadEvent_Click">
+            <Button.BitmapEffect>
+                <DropShadowBitmapEffect Color="Black" Direction="300" Softness=".3" ShadowDepth="5" Opacity="0.2"/>
+            </Button.BitmapEffect>
+        </Button>
         <Frame Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="4" 
                Grid.RowSpan="4" Name="eventInterface" NavigationUIVisibility="Hidden"/>
     </Grid>

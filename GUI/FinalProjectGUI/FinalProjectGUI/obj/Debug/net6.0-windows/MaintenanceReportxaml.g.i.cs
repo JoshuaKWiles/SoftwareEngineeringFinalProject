@@ -117,7 +117,7 @@ namespace FinalProjectGUI {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/FinalProjectGUI;component/maintenancereportxaml.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/FinalProjectGUI;V1.0.0.0;component/maintenancereportxaml.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\MaintenanceReportxaml.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

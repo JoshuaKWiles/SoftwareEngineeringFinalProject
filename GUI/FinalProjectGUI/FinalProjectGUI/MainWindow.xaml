@@ -27,9 +27,46 @@
             <RowDefinition Height="10*"/>
             <RowDefinition Height=".3*"/>
         </Grid.RowDefinitions>
+        <Button Name="guestInterface" 
+                Content="View Guest Interface"
+                Grid.Column="1" 
+                Grid.Row="2" 
+                Grid.ColumnSpan="3" 
+                Margin="50,44,51,55" 
+                Grid.RowSpan="2" Click="guestInterface_Click">
+            <Button.BitmapEffect>
+                <DropShadowBitmapEffect Color="Black" Direction="300" Softness=".3" ShadowDepth="5" Opacity="0.2"/>
+            </Button.BitmapEffect>
+        </Button>
+        
+        <Button Name="presenterInterface" 
+                Content="View Presenter Interface"
+                Grid.Column="3" 
+                Grid.Row="2" 
+                Grid.ColumnSpan="4" 
+                Margin="101,44,101,55" 
+                Grid.RowSpan="2" Click="presenterInterface_Click">
+            <Button.BitmapEffect>
+                <DropShadowBitmapEffect Color="Black" Direction="300" Softness=".3" ShadowDepth="5" Opacity="0.2"/>
+            </Button.BitmapEffect>
+        </Button>
+        
+        <Button Name="employeeInterface" 
+                Content="View Employee Interface"
+                Grid.Column="6" 
+                Grid.Row="2" 
+                Grid.ColumnSpan="3" 
+                Margin="50,44,51,55" 
+                Grid.RowSpan="2" Click="employeeInterface_Click">
+            <Button.BitmapEffect>
+                <DropShadowBitmapEffect Color="Black" Direction="300" Softness=".3" ShadowDepth="5" Opacity="0.2"/>
+            </Button.BitmapEffect>
+        </Button>
+        
         <Frame Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="8" Grid.RowSpan="4"
-               Background="LightGray" Name="main_frame" NavigationUIVisibility="Hidden">
-            
+               Background="LightGray" Name="main_frame" NavigationUIVisibility="Hidden"
+               Visibility="Hidden">
+
         </Frame>
     </Grid>
 </Window>

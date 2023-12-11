@@ -23,6 +23,27 @@ namespace FinalProjectGUI
         public MainWindow()
         {
             InitializeComponent();
+            
+        }
+
+        private void guestInterface_Click(object sender, RoutedEventArgs e)
+        {
+            main_frame.Visibility = Visibility.Visible;
+            while (main_frame.NavigationService.RemoveBackEntry() != null) ;
+            main_frame.Navigate(new GuestInterface());
+        }
+
+        private void presenterInterface_Click(object sender, RoutedEventArgs e)
+        {
+            main_frame.Visibility = Visibility.Visible;
+            while (main_frame.NavigationService.RemoveBackEntry() != null) ;
+            main_frame.Navigate(new PresenterInterface());
+        }
+
+        private void employeeInterface_Click(object sender, RoutedEventArgs e)
+        {
+            main_frame.Visibility = Visibility.Visible;
+            while (main_frame.NavigationService.RemoveBackEntry() != null) ;
             main_frame.Navigate(new EmployeeInterface());
         }
     }
