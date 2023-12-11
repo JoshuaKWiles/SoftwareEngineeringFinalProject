@@ -1,26 +1,27 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Josh\\Documents\\SoftwareEngineeringFinalProject\\SoftwareEngineeringFinalProject\\GUI\\FinalProjectGUI\\FinalProjectGUI\\FinalProjectGUI.csproj": {}
+    "C:\\Users\\kingj\\source\\repos\\SoftwareEngineeringFinalProject\\SoftwareEngineeringFinalProject\\GUI\\FinalProjectGUI\\FinalProjectGUI\\FinalProjectGUI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Josh\\Documents\\SoftwareEngineeringFinalProject\\SoftwareEngineeringFinalProject\\GUI\\FinalProjectGUI\\FinalProjectGUI\\FinalProjectGUI.csproj": {
+    "C:\\Users\\kingj\\source\\repos\\SoftwareEngineeringFinalProject\\SoftwareEngineeringFinalProject\\GUI\\FinalProjectGUI\\FinalProjectGUI\\FinalProjectGUI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Josh\\Documents\\SoftwareEngineeringFinalProject\\SoftwareEngineeringFinalProject\\GUI\\FinalProjectGUI\\FinalProjectGUI\\FinalProjectGUI.csproj",
+        "projectUniqueName": "C:\\Users\\kingj\\source\\repos\\SoftwareEngineeringFinalProject\\SoftwareEngineeringFinalProject\\GUI\\FinalProjectGUI\\FinalProjectGUI\\FinalProjectGUI.csproj",
         "projectName": "FinalProjectGUI",
-        "projectPath": "C:\\Users\\Josh\\Documents\\SoftwareEngineeringFinalProject\\SoftwareEngineeringFinalProject\\GUI\\FinalProjectGUI\\FinalProjectGUI\\FinalProjectGUI.csproj",
-        "packagesPath": "C:\\Users\\Josh\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Josh\\Documents\\SoftwareEngineeringFinalProject\\SoftwareEngineeringFinalProject\\GUI\\FinalProjectGUI\\FinalProjectGUI\\obj\\",
+        "projectPath": "C:\\Users\\kingj\\source\\repos\\SoftwareEngineeringFinalProject\\SoftwareEngineeringFinalProject\\GUI\\FinalProjectGUI\\FinalProjectGUI\\FinalProjectGUI.csproj",
+        "packagesPath": "C:\\Users\\kingj\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\kingj\\source\\repos\\SoftwareEngineeringFinalProject\\SoftwareEngineeringFinalProject\\GUI\\FinalProjectGUI\\FinalProjectGUI\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
         ],
         "configFilePaths": [
-          "C:\\Users\\Josh\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\kingj\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net6.0-windows7.0"

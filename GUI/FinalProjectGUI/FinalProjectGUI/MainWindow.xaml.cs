@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,7 +24,19 @@ namespace FinalProjectGUI
         public MainWindow()
         {
             InitializeComponent();
-            
+        }
+
+        public List<List<string>> getEventData()
+        {
+            //This would normally pull from the c++ on startup, but, y'know
+            List<string> tempLine = File.ReadAllLines("events.txt").Skip(0).ToList();
+
+            List<List<string>> allData = new List<List<string>>();
+            foreach (string line in tempLine)
+            {
+                allData.Add(line.Split(@"\").ToList());
+            }
+            return allData;
         }
 
         private void guestInterface_Click(object sender, RoutedEventArgs e)
