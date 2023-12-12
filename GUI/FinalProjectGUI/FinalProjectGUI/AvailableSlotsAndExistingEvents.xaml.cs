@@ -28,11 +28,37 @@ namespace FinalProjectGUI
             InitializeComponent();
             eventsForToday = inputEvents;
             allEntries.Add(originalBorder);
+            originalBorder.Visibility = Visibility.Collapsed;
             userType = inputUserType;
+
+            //intervals: "8:00 AM - 10:00 AM", "10:30 AM - 12:30 PM", "1:00 PM - 3:00 PM", "3:30 PM - 5:30 PM", "6:00 PM - 8:00 PM"
+            foreach (List<string> entry in eventsForToday)
+            {
+                int timeIndex = 0;
+                switch (Convert.ToInt32(entry[2].Split(":")[0]))
+                {
+                    case 8:
+                        timeIndex = 1;
+                        break;
+                    case 10:
+                        timeIndex = 2;
+                        break;
+                    case 13:
+                        timeIndex = 3;
+                        break;
+                    case 15:
+                        timeIndex = 4;
+                        break;
+                    case 18:
+                        timeIndex = 5;
+                        break;
+                    default:
+                        timeIndex = 0;
+                        break;
+                }
+                allEntries.Add(addNewItem(entry[0], Convert.ToInt32(entry[3]) + 1, timeIndex));
+            }
         }
-
-
-
         private Border addNewItem(string eventName = "", int desiredRoom = 0, int desiredTime = 0)
         {
             Border board = new Border();
@@ -55,6 +81,7 @@ namespace FinalProjectGUI
             title.BorderThickness = new Thickness(2);
             title.MaxLength = 35;
             title.IsReadOnly = true;
+            title.Text = eventName;
 
             StackPanel roomDropdown = new StackPanel();
             mainHolder.Children.Add(roomDropdown);
@@ -146,10 +173,18 @@ namespace FinalProjectGUI
             else if (userType == "presenter")
             {
                 editEvent.Visibility = Visibility.Hidden;
+                if (eventName != "")
+                {
+                    claimTimeslot.Visibility = Visibility.Hidden;
+                }
             }
             else if (userType == "employee")
             {
                 checkin.Visibility = Visibility.Hidden;
+                if (eventName != "")
+                {
+                    claimTimeslot.Visibility = Visibility.Hidden;
+                }
             }    
 
             return board;

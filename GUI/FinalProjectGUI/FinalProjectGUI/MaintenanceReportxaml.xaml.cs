@@ -23,26 +23,35 @@ namespace FinalProjectGUI
         public MaintenanceReportxaml()
         {
             InitializeComponent();
+
+            equipmentRadio.IsChecked = true;
+            userInputBox.Text = "Describe Grievance...";
         }
 
         private void MaintenanceOptions_Checked(object sender, RoutedEventArgs e)
         {
-            if (equipmentRadio.IsChecked == true)
+            try
             {
-                equipmentCombo.Visibility = Visibility.Visible;
-                roomCombo.Visibility = Visibility.Hidden;
+                if (equipmentRadio.IsChecked == true)
+                {
+                    roomCombo.Visibility = Visibility.Hidden;
+                    equipmentCombo.Visibility = Visibility.Visible;
+                }
+                else if (roomRadio.IsChecked == true)
+                {
+                    equipmentCombo.Visibility = Visibility.Hidden;
+                    roomCombo.Visibility = Visibility.Visible;
+                }
+                else if (facilitiesRadio.IsChecked == true)
+                {
+                    equipmentCombo.Visibility = Visibility.Hidden;
+                    roomCombo.Visibility = Visibility.Hidden;
+                }
             }
-            else if (roomRadio.IsChecked == true)
+            catch
             {
-                equipmentCombo.Visibility = Visibility.Hidden;
-                roomCombo.Visibility = Visibility.Visible;
-            }
-            else if (facilitiesRadio.IsChecked == true)
-            {
-                equipmentCombo.Visibility = Visibility.Hidden;
-                roomCombo.Visibility = Visibility.Hidden;
-            }
 
+            }
             checkForEnableButtonParam();
         }
 

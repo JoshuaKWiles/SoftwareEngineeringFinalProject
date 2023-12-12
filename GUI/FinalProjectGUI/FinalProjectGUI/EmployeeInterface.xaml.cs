@@ -1,17 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace FinalProjectGUI
 {
@@ -63,9 +53,8 @@ namespace FinalProjectGUI
         }
         private void ViewScheduleButton_Click(object sender, RoutedEventArgs e)
         {
+            while (eventInterface.NavigationService.RemoveBackEntry() != null) ;
             scheduleCalendar.Visibility = Visibility.Visible;
-
-            
         }
 
         private void LoadEvent_Click(object sender, RoutedEventArgs e)
@@ -97,7 +86,7 @@ namespace FinalProjectGUI
                     if (eventInst[1] == selectedDateEvents.ToString("MM-dd-yyyy"))
                         eventsOfDate.Add(eventInst);
                 }
-                eventInterface.Navigate(new AvailableSlotsAndExistingEvents(eventsOfDate));
+                eventInterface.Navigate(new AvailableSlotsAndExistingEvents(eventsOfDate, userType));
             }
         }
     }

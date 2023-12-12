@@ -1,0 +1,13 @@
+Release 0.1
+
+This release is comprised of the executable for the UI.
+
+Because of the project setbacks, the two frontend and backend portions are incomplete and not linked. 
+
+Goal: Create a working demo
+	To supplement the issue, code has been implimented into the frontend that allows it to read event data from a text file in place of a C++ program.
+
+Inputs:
+	input.txt with properly formatted event data
+Output: 
+	UI with dynamically allocated containers for event data
