@@ -20,11 +20,13 @@ namespace FinalProjectGUI
     /// </summary>
     public partial class PresenterInterface : Page
     {
-        private List<Event> allEvents = new List<Event>();
+        private List<List<string>> allEvents = new List<List<string>>();
         private string userType = "presenter";
-        public PresenterInterface()
+        public PresenterInterface(List<List<string>> eventData)
         {
             InitializeComponent();
+
+            allEvents = eventData;
         }
 
         private void reportDamages_Click(object sender, RoutedEventArgs e)

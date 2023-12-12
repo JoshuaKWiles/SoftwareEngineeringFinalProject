@@ -34,7 +34,8 @@
                 <Border BorderThickness="2" 
                         BorderBrush="Gray"
                         Height="114"
-                        Background="#c8c8c8">
+                        Background="#c8c8c8"
+                        Name="originalBorder">
                     <StackPanel Name="event0" Height="110">
                         <TextBox Name="event0Name"
                                  FontSize="20"
@@ -51,6 +52,7 @@
                                       Width="320"
                                       IsEnabled="False"
                                       IsReadOnly="True">
+                                <ComboBoxItem Content="--Select a Room--"/>
                                 <ComboBoxItem Content="Roosevelt"/>
                                 <ComboBoxItem Content="Lincoln" IsSelected="True"/>
                                 <ComboBoxItem Content="Washington"/>
@@ -64,6 +66,7 @@
                                       Width="320"
                                       IsEnabled="False"
                                       IsReadOnly="True">
+                                <ComboBoxItem Content="--Select A Time--"/> 
                                 <ComboBoxItem Content="8:00 AM - 10:00 AM"/> 
                                 <ComboBoxItem Content="10:30 AM - 12:30 PM"/> 
                                 <ComboBoxItem Content="1:00 PM - 3:00 PM" IsSelected="True"/> 

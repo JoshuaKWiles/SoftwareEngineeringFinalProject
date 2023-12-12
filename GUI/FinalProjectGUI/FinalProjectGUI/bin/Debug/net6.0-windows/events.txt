@@ -1,0 +1,5 @@
+EventName^EventDate(XX-XX-XXXX)^EventTime(24hr-EST)^Location(0-Roosevelt,1-Lincoln,or2-Washinton)^ExtraInfo
+How To Become A Millionare^12-14-2023^16:00^0^100 Guests
+How To Become A Billionare^12-14-2023^18:30^0^100 Guests
+How To Change A Lightbulb^12-14-2023^16:00^2^400 Guests
+Don Cheadle Fan Meeting^12-14-2023^16:00^1^200 Guests

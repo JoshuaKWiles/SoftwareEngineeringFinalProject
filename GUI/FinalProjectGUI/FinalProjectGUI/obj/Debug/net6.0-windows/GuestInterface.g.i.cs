@@ -77,7 +77,7 @@ namespace FinalProjectGUI {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/FinalProjectGUI;V1.0.0.0;component/guestinterface.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/FinalProjectGUI;component/guestinterface.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\GuestInterface.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

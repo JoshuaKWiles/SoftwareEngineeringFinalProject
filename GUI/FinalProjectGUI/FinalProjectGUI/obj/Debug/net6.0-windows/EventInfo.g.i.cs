@@ -197,7 +197,7 @@ namespace FinalProjectGUI {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/FinalProjectGUI;V1.0.0.0;component/eventinfo.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/FinalProjectGUI;component/eventinfo.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\EventInfo.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

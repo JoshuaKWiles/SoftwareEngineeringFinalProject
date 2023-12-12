@@ -20,9 +20,17 @@ namespace FinalProjectGUI
     /// </summary>
     public partial class GuestInterface : Page
     {
-        public GuestInterface()
+        List<List<string>> allEvents = new List<List<string>>();
+        public GuestInterface(List<List<string>> eventData)
         {
             InitializeComponent();
+
+            allEvents = eventData;
+        }
+
+        private void reportDamages_Click(object sender, RoutedEventArgs e)
+        {
+            eventInterface.Navigate(new MaintenanceReportxaml());
         }
     }
 }

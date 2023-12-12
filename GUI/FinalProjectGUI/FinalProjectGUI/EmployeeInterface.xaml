@@ -28,7 +28,7 @@
         <Calendar Grid.Column="1" Grid.ColumnSpan="2" 
                   SelectionMode="SingleRange" VerticalAlignment="Center"
                   Grid.Row="1" Grid.RowSpan="2" Visibility="Hidden"
-                  Name="scheduleCalendar"/>
+                  Name="scheduleCalendar" SelectedDatesChanged="scheduleCalendar_SelectedDatesChanged"/>
         
         <Button Grid.Column="6" Grid.Row="0" Grid.ColumnSpan="2"
                 Margin="15" FontSize="20" Content="View Schedule" Click="ViewScheduleButton_Click"

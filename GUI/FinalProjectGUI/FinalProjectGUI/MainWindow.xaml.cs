@@ -21,6 +21,8 @@ namespace FinalProjectGUI
     /// </summary>
     public partial class MainWindow : Window
     {
+
+
         public MainWindow()
         {
             InitializeComponent();
@@ -34,30 +36,35 @@ namespace FinalProjectGUI
             List<List<string>> allData = new List<List<string>>();
             foreach (string line in tempLine)
             {
-                allData.Add(line.Split(@"\").ToList());
+                allData.Add(line.Split("^").ToList());
             }
             return allData;
+        }
+
+        public void writeEventData(List<string> input)
+        {
+            File.AppendAllText("events.txt", String.Join("^", input.ToArray()) + "\n");
         }
 
         private void guestInterface_Click(object sender, RoutedEventArgs e)
         {
             main_frame.Visibility = Visibility.Visible;
             while (main_frame.NavigationService.RemoveBackEntry() != null) ;
-            main_frame.Navigate(new GuestInterface());
+            main_frame.Navigate(new GuestInterface(getEventData()));
         }
 
         private void presenterInterface_Click(object sender, RoutedEventArgs e)
         {
             main_frame.Visibility = Visibility.Visible;
             while (main_frame.NavigationService.RemoveBackEntry() != null) ;
-            main_frame.Navigate(new PresenterInterface());
+            main_frame.Navigate(new PresenterInterface(getEventData()));
         }
 
         private void employeeInterface_Click(object sender, RoutedEventArgs e)
         {
             main_frame.Visibility = Visibility.Visible;
             while (main_frame.NavigationService.RemoveBackEntry() != null) ;
-            main_frame.Navigate(new EmployeeInterface());
+            main_frame.Navigate(new EmployeeInterface(getEventData()));
         }
     }
 }
