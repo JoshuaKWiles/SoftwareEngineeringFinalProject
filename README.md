@@ -5,3 +5,5 @@ To run the UI portion of the code, open the release 0.1 folder and run the .exe
 To run the c++ code, open the .sln file and activate the UniversityConferenceCenterSystem project and unload the rest
 
 To view extra files like diagrams, the SRS, and the presentation file, open the Additional Resources folder
+
+Here is the link to the github: https://github.com/JoshuaKWiles/SoftwareEngineeringFinalProject/tree/Release
